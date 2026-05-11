@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 1 — Days 1–90 | Operation Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/print.css" />
+  <style>
+    .phase-hero {
+      background: linear-gradient(135deg, #0a0a1f, #0d1020);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .phase-hero::before {
+      content: '';
+      position: absolute; top:0; left:0; right:0; height:4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--gold));
+    }
+    .phase-hero .bg-num {
+      position:absolute; right:32px; top:50%; transform:translateY(-50%);
+      font-size:10rem; font-weight:900; color:rgba(0,212,255,0.04);
+      line-height:1; pointer-events:none;
+    }
+    .week-tab-panel { display:none; }
+    .week-tab-panel.active { display:block; }
+    .workout-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .workout-block-header {
+      padding: 16px 22px;
+      background: var(--bg-input);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .workout-block-header h4 { font-size: 1rem; display:flex; align-items:center; gap:10px; }
+    .exercise-section { padding: 0; }
+    .section-header {
+      padding: 12px 22px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      background: rgba(0,212,255,0.03);
+      border-bottom: 1px solid var(--border);
+    }
+    .done-btn {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--border-bright);
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex; align-items:center; justify-content:center;
+      font-size: 0.75rem;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .done-btn.checked { background: var(--success); border-color: var(--success); color:#000; }
+    .intensity-bar { display:flex; gap:3px; margin-top:4px; }
+    .intensity-dot { width:8px; height:8px; border-radius:50%; background:var(--border); }
+    .intensity-dot.fill { background:var(--primary); }
+    .intensity-dot.fill.red { background:var(--danger); }
+    .cue-box {
+      background: rgba(0,212,255,0.04);
+      border-left: 3px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 0 22px 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="overlay-bg" id="navOverlay"></div>
+<div class="app-layout">
+
+  <header class="site-header">
+    <div class="header-logo">
+      <div class="logo-icon">⚡</div>
+      <span>OPERATION <span>PRIME</span></span>
+    </div>
+    <div class="header-meta">
+      <span class="day-badge" data-day-number>Day 1</span>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <a href="../index.html" class="nav-link"><span class="nav-icon">⚡</span> Dashboard</a>
+      <a href="calendar.html" class="nav-link"><span class="nav-icon">📅</span> Calendar</a>
+      <a href="habits.html" class="nav-link"><span class="nav-icon">✅</span> Habit Tracker</a>
+      <a href="tracker.html" class="nav-link"><span class="nav-icon">📊</span> Progress</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Training</div>
+      <a href="phase1.html" class="nav-link active"><span class="nav-icon">🔱</span> Phase 1 (Days 1–90)</a>
+      <a href="phase2.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 2 (Mo. 4–6)</a>
+      <a href="phase3.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 3 (Mo. 7–9)</a>
+      <a href="phase4.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 4 (Mo. 10–12)</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Protocols</div>
+      <a href="rehab.html" class="nav-link"><span class="nav-icon">🦴</span> Rehab Library</a>
+      <a href="mobility.html" class="nav-link"><span class="nav-icon">🧘</span> Mobility Library</a>
+      <a href="daily.html" class="nav-link"><span class="nav-icon">🕐</span> Daily Schedule</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Lifestyle</div>
+      <a href="nutrition.html" class="nav-link"><span class="nav-icon">🥩</span> Nutrition System</a>
+      <a href="equipment.html" class="nav-link"><span class="nav-icon">🛒</span> Equipment Guide</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- Phase Hero -->
+    <div class="phase-hero">
+      <div class="bg-num">1</div>
+      <div class="label mb-8" style="color:var(--primary)">Phase 1 · Days 1–90 · 13 Weeks</div>
+      <h1 style="margin-bottom:12px">Foundation &amp; <span class="gradient-text">Reconstruction</span></h1>
+      <p style="max-width:580px; margin-bottom:20px">The most important 90 days of your life. Fix the base before building the structure. Posture, mobility, rehab, glute activation, and sustainable fat loss. No ego. Pure fundamentals.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <div class="badge badge-primary">Mobility-First</div>
+        <div class="badge badge-gold">Progressive Overload</div>
+        <div class="badge badge-success">Injury Prevention</div>
+        <div class="badge badge-warning">Fat Loss: -1lb/week</div>
+      </div>
+    </div>
+
+    <!-- Phase Overview -->
+    <div class="alert alert-gold mb-24">
+      <span>⚡</span>
+      <div>
+        <strong>Phase 1 Philosophy:</strong> You have chronic lower back pain, forward head posture, a healed Grade 3 ankle tear, and shoulder instability. Before any heavy lifting, we rebuild the base. Weeks 1–4 are corrective. Weeks 5–8 build. Weeks 9–12 introduce strength. Every session begins and ends with your rehab stack.
+      </div>
+    </div>
+
+    <div class="grid-3 mb-32">
+      <div class="card text-center">
+        <div style="font-size:2rem">🎯</div>
+        <h4 style="margin:8px 0 4px">Weeks 1–4</h4>
+        <p style="font-size:0.82rem">Corrective Foundation</p>
+        <div class="tag-row" style="justify-content:center; margin-top:10px">
+          <span class="tag">Glute activation</span>
+          <span class="tag">Posture reset</span>
+        </div>
+      </div>
+      <div class="card text-center">
+        <div style="font-size:2rem">📈</div>
+        <h4 style="margin:8px 0 4px">Weeks 5–8</h4>
+        <p style="font-size:0.82rem">Build & Activate</p>
+        <div class="tag-row" style="justify-content:center; margin-top:10px">
+          <span class="tag">Volume increase</span>
+          <span class="tag">Add compounds</span>
+        </div>
+      </div>
+      <div class="card text-center">
+        <div style="font-size:2rem">💪</div>
+        <h4 style="margin:8px 0 4px">Weeks 9–12</h4>
+        <p style="font-size:0.82rem">Strength Foundation</p>
+        <div class="tag-row" style="justify-content:center; margin-top:10px">
+          <span class="tag">Progressive overload</span>
+          <span class="tag">Full programs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── UNIVERSAL DAILY STACK ── -->
+    <div class="card mb-32">
+      <div class="card-header">
+        <h3>🔄 Universal Daily Stack — Every Single Day</h3>
+        <span class="badge badge-danger">NON-NEGOTIABLE</span>
+      </div>
+      <p class="mb-16">These protocols happen EVERY day regardless of training or rest. They are the foundation of your rehab and posture correction.</p>
+
+      <div class="grid-2">
+        <div>
+          <div class="section-header" style="border-radius:var(--radius-sm); margin-bottom:8px">☀️ Morning Stack (10–15 min)</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">Chin Tucks</div><div class="exercise-cue">Cervical retraction — "make a double chin"</div></td><td><span class="sets-badge">3×10</span></td><td><a href="https://www.youtube.com/results?search_query=chin+tuck+exercise+forward+head+posture" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Cat-Cow</div><div class="exercise-cue">Slow, controlled spinal flexion/extension</div></td><td><span class="sets-badge">2×10</span></td><td><a href="https://www.youtube.com/results?search_query=cat+cow+stretch+spine" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Hip 90/90 Stretch</div><div class="exercise-cue">2 min each side. Breathe into the hip.</div></td><td><span class="sets-badge">2 min/side</span></td><td><a href="https://www.youtube.com/results?search_query=90 90 hip stretch" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Band Pull Apart</div><div class="exercise-cue">Rear delt / rhomboid activation. Squeeze at end.</div></td><td><span class="sets-badge">2×20</span></td><td><a href="https://www.youtube.com/results?search_query=band pull apart exercise" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Ankle Circles</div><div class="exercise-cue">Each direction. Full range of motion. Left ankle priority.</div></td><td><span class="sets-badge">20 each way</span></td><td><a href="https://www.youtube.com/results?search_query=ankle mobility circles" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="section-header" style="border-radius:var(--radius-sm); margin-bottom:8px">🦴 McGill Big 3 — Core Foundation</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Protocol</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">McGill Curl-Up</div><div class="exercise-cue">Neck supported, lumbar neutral, minimal movement</div></td><td><span class="sets-badge">3×(8,6,4)</span></td><td><a href="https://www.youtube.com/results?search_query=mcgill curl up exercise" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Bird Dog</div><div class="exercise-cue">Opposite arm/leg. 10-sec hold. Squeeze glute. Zero rotation.</div></td><td><span class="sets-badge">3×(8,6,4)</span></td><td><a href="https://www.youtube.com/results?search_query=mcgill bird dog exercise" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Side Plank</div><div class="exercise-cue">Modified (knee down) if needed. Hips stacked. Breathe.</div></td><td><span class="sets-badge">3×(10,8,6s)</span></td><td><a href="https://www.youtube.com/results?search_query=mcgill side plank" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+          <div class="cue-box">💡 McGill Big 3 sets descend: first set is longest, each subsequent set slightly shorter. Rest 30 sec between sets. Progression: add 2 reps every 2 weeks.</div>
+
+          <div class="section-header" style="border-radius:var(--radius-sm); margin:12px 0 8px">🌙 Evening Wind-Down (10 min)</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Duration</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">Child's Pose</div><div class="exercise-cue">Arms extended, breathe into lower back</div></td><td>90 sec</td></tr>
+              <tr><td><div class="exercise-name">Supine Spinal Twist</div><div class="exercise-cue">Both sides. Breathe deeply.</div></td><td>60 sec/side</td></tr>
+              <tr><td><div class="exercise-name">Couch Stretch / Hip Flexor</div><div class="exercise-cue">Left ankle priority: no stress on ligaments</div></td><td>90 sec/side</td></tr>
+              <tr><td><div class="exercise-name">Legs Up the Wall</div><div class="exercise-cue">Recovery position. Deep breathing. 5 min.</div></td><td>5 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WEEK-BY-WEEK NAVIGATOR ── -->
+    <div class="page-header" style="margin-bottom:16px">
+      <div class="label">Workout Programs</div>
+      <h2>Weekly Training Plans</h2>
+    </div>
+
+    <div class="tabs" id="blockTabs">
+      <button class="tab-btn active" data-tab="block1">Weeks 1–4<br><span style="font-size:0.65rem;opacity:0.7">Foundation</span></button>
+      <button class="tab-btn" data-tab="block2">Weeks 5–8<br><span style="font-size:0.65rem;opacity:0.7">Build</span></button>
+      <button class="tab-btn" data-tab="block3">Weeks 9–12<br><span style="font-size:0.65rem;opacity:0.7">Strength</span></button>
+    </div>
+
+    <!-- ══════════ BLOCK 1: WEEKS 1–4 ══════════ -->
+    <div class="tab-panel active" id="block1" data-tabs-container>
+
+      <div class="alert alert-info mb-20">
+        <span>🎯</span>
+        <div><strong>Block 1 Focus (Days 1–28):</strong> No barbell work. Focus on movement quality, glute activation, posterior chain awakening, and daily rehab. Ego stays at the door. These 4 weeks build the neural foundation everything else is built on.</div>
+      </div>
+
+      <!-- DAY 1 — Lower Body -->
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>🦵 Monday — Lower Body Foundation + Rehab</h4>
+          <div style="display:flex; gap:8px; align-items:center">
+            <span class="badge badge-muted">45–55 min</span>
+            <span class="badge badge-primary">Weeks 1–4</span>
+            <button class="btn btn-secondary btn-sm" onclick="logWorkoutDone('mon_lower')">✓ Mark Done</button>
+          </div>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">🔥 Warm-Up (10 min)</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps/Time</th><th>Rest</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">Ankle Mobility Drill</div><div class="exercise-cue">Knee-to-wall. 10 reps each direction. Left foot priority.</div></td><td><span class="sets-badge">2×10/side</span></td><td>—</td><td><a href="https://www.youtube.com/results?search_query=ankle mobility knee to wall drill" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Hip CARs (Controlled Articular Rotations)</div><div class="exercise-cue">Slow full circles. Maximize range without compensating.</div></td><td><span class="sets-badge">5 circles/side</span></td><td>—</td><td><a href="https://www.youtube.com/results?search_query=hip cars controlled articular rotations" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Glute Bridge (Bodyweight)</div><div class="exercise-cue">2-sec squeeze at top. Feel both glutes firing.</div></td><td><span class="sets-badge">2×15</span></td><td>30s</td><td><a href="https://www.youtube.com/results?search_query=glute bridge tutorial" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">World's Greatest Stretch</div><div class="exercise-cue">Hip flexor, thoracic rotation, hamstring. 5 reps/side.</div></td><td><span class="sets-badge">5/side</span></td><td>—</td><td><a href="https://www.youtube.com/results?search_query=world greatest stretch mobility" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-header">💪 Main Work (30 min)</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Rest</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">A1. Glute Bridge — Barbell or Bodyweight</div><div class="exercise-cue">Drive through heels. 3-sec hold. Neutral spine. Wks 1-2: BW. Wks 3-4: add load.</div></td><td><span class="sets-badge">4×12</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=glute bridge barbell hip thrust technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">A2. Clamshell</div><div class="exercise-cue">Band above knee. Hip external rotation. Don't rotate pelvis.</div></td><td><span class="sets-badge">3×20/side</span></td><td>30s</td><td><a href="https://www.youtube.com/results?search_query=clamshell exercise glute activation" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B1. Box Squat (to box/chair)</div><div class="exercise-cue">Sit back to box (parallel or higher). Push knees out. Pause 1 sec on box.</div></td><td><span class="sets-badge">3×10</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=box squat technique tutorial" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B2. Romanian Deadlift (DB or BW)</div><div class="exercise-cue">Hinge at hip. Soft knees. Feel hamstring stretch. Neutral spine always.</div></td><td><span class="sets-badge">3×12</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=romanian deadlift dumbbell technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C1. Single Leg Glute Bridge</div><div class="exercise-cue">One foot off floor. Level hips. Left/right equal. Addresses imbalances.</div></td><td><span class="sets-badge">3×10/side</span></td><td>45s</td><td><a href="https://www.youtube.com/results?search_query=single leg glute bridge" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C2. Banded Monster Walk</div><div class="exercise-cue">Band above knees. Squat stance. 10 steps forward, 10 back, 10 each side.</div></td><td><span class="sets-badge">3×10 each dir</span></td><td>30s</td><td><a href="https://www.youtube.com/results?search_query=banded monster walk lateral" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">D. Calf Raise (Bilateral, slow)</div><div class="exercise-cue">3-sec up, 3-sec down. Full range. Ankle mobility. Left ankle: avoid pain.</div></td><td><span class="sets-badge">3×15</span></td><td>45s</td><td><a href="https://www.youtube.com/results?search_query=calf raise slow eccentric" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-header">🦴 Rehab Stack + McGill Big 3</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Protocol</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">Terminal Knee Extension (TKE) — Band</div><div class="exercise-cue">VMO activation. Light band. Full extension squeeze. Knee pain prevention.</div></td><td><span class="sets-badge">3×15/side</span></td><td><a href="https://www.youtube.com/results?search_query=terminal knee extension band TKE" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Ankle ABC / Single Leg Balance</div><div class="exercise-cue">Alphabet on left ankle. Then 30-sec balance. Progress: eyes closed wk 3+.</div></td><td><span class="sets-badge">1 set + 30s balance</span></td><td><a href="https://www.youtube.com/results?search_query=ankle stability balance proprioception" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">McGill Big 3</div><div class="exercise-cue">See Daily Stack above. Do after training.</div></td><td><span class="sets-badge">Full protocol</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-header">🧊 Cool-Down (5 min)</div>
+          <table class="workout-table">
+            <tbody>
+              <tr><td><div class="exercise-name">Pigeon Pose</div><div class="exercise-cue">2 min each side. Breathe into the hip.</div></td><td>2 min/side</td></tr>
+              <tr><td><div class="exercise-name">Supine Figure-4 Stretch</div><div class="exercise-cue">Glute/piriformis. Both sides.</div></td><td>90 sec/side</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DAY 2 — Upper Body -->
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>💪 Tuesday — Upper Body Foundation + Posture Protocol</h4>
+          <div style="display:flex; gap:8px; align-items:center">
+            <span class="badge badge-muted">45–55 min</span>
+            <button class="btn btn-secondary btn-sm" onclick="logWorkoutDone('tue_upper')">✓ Mark Done</button>
+          </div>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">🔥 Warm-Up (10 min)</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Protocol</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">Shoulder CARs</div><div class="exercise-cue">Full shoulder circumduction. Slow. Max range. Both arms.</div></td><td><span class="sets-badge">5 circles/side</span></td><td><a href="https://www.youtube.com/results?search_query=shoulder cars controlled articular rotation" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Thoracic Extension Over Foam Roller</div><div class="exercise-cue">Roller at mid-back. Arms crossed. 5 extensions per level. 3 levels.</div></td><td><span class="sets-badge">5 reps × 3 spots</span></td><td><a href="https://www.youtube.com/results?search_query=thoracic extension foam roller mobility" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Wall Slide</div><div class="exercise-cue">Back flat against wall. Slide arms from 90° to overhead. No arch. Scapular control.</div></td><td><span class="sets-badge">2×12</span></td><td><a href="https://www.youtube.com/results?search_query=wall slide exercise shoulder rehab" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Band Pull Apart</div><div class="exercise-cue">Posterior delt activation. Squeeze shoulder blades at end range.</div></td><td><span class="sets-badge">2×20</span></td><td><a href="https://www.youtube.com/results?search_query=resistance band pull apart" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-header">💪 Main Work (30 min)</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Rest</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">A1. Dumbbell Row (Single Arm)</div><div class="exercise-cue">Brace core. Lead with elbow. Full range. Squeeze at top. Wks 1-2: moderate weight.</div></td><td><span class="sets-badge">4×12/side</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=single arm dumbbell row technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">A2. Face Pull (Cable or Band)</div><div class="exercise-cue">Pull to forehead. External rotate at end. Elbows high. Rear delt + rotator cuff.</div></td><td><span class="sets-badge">3×15</span></td><td>45s</td><td><a href="https://www.youtube.com/results?search_query=face pull cable band technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B1. Push-Up (Perfect Form)</div><div class="exercise-cue">Wks 1-2: incline if needed. Full scapular protraction at top. No flared elbows. Core tight.</div></td><td><span class="sets-badge">3×10</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=perfect push up form scapula" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B2. Scapular Push-Up</div><div class="exercise-cue">Arms straight. Protract/retract shoulder blades only. Serratus anterior. Critical for shoulder health.</div></td><td><span class="sets-badge">3×15</span></td><td>30s</td><td><a href="https://www.youtube.com/results?search_query=scapular push up serratus anterior" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C1. DB Lateral Raise (Controlled)</div><div class="exercise-cue">Light weight. Lead with pinky. 3-sec eccentric. No momentum. Shoulder integrity first.</div></td><td><span class="sets-badge">3×12</span></td><td>45s</td><td><a href="https://www.youtube.com/results?search_query=lateral raise controlled technique shoulder" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C2. Prone Y-T-W</div><div class="exercise-cue">Lying face down. Form Y, T, W with arms. Squeeze shoulder blades. Light or bodyweight.</div></td><td><span class="sets-badge">3×10 each</span></td><td>45s</td><td><a href="https://www.youtube.com/results?search_query=prone YTW exercise shoulder rehab" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">D. Dead Hang</div><div class="exercise-cue">Passive hang. Decompresses spine. Shoulder distraction. Build to 60 sec total.</div></td><td><span class="sets-badge">3×20-30 sec</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=dead hang spine decompression" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-header">🦴 Shoulder Rehab Stack</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Protocol</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">External Rotation — Band/Cable</div><div class="exercise-cue">Elbow at side. Rotate out 90°. Slow. Rotator cuff activation.</div></td><td><span class="sets-badge">3×15/side</span></td><td><a href="https://www.youtube.com/results?search_query=external rotation band rotator cuff" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Chin Tuck + Neck Extension</div><div class="exercise-cue">Chin tuck first. Then slowly look up. Cervical spine health.</div></td><td><span class="sets-badge">3×10</span></td><td><a href="https://www.youtube.com/results?search_query=chin tuck cervical neck exercise" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Doorway Pec Stretch</div><div class="exercise-cue">3 positions: low, mid, high. 30 sec each. Counter desk posture.</div></td><td><span class="sets-badge">30 sec × 3</span></td><td><a href="https://www.youtube.com/results?search_query=doorway chest pec stretch posture" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DAY 3 — Zone 2 -->
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>❤️ Wednesday — Zone 2 Cardio + Full Mobility Session</h4>
+          <div style="display:flex; gap:8px; align-items:center">
+            <span class="badge badge-muted">50–60 min</span>
+            <span class="badge badge-success">Recovery Day</span>
+          </div>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">❤️ Cardio Protocol (35–40 min)</div>
+          <div class="cue-box">
+            <strong>Zone 2 Target:</strong> Heart rate 120–140 BPM. Conversational pace — you can speak full sentences. Fat-burning zone. Builds mitochondrial density. Option A: Incline treadmill walk (4–5% incline, 3.0–3.5 mph). Option B: Rowing machine (steady 22-24 SPM). Option C: Outdoor walk (hilly terrain preferred).
+          </div>
+          <table class="workout-table">
+            <thead><tr><th>Week</th><th>Duration</th><th>Target HR</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Weeks 1–2</td><td><span class="sets-badge">30 min</span></td><td>120–130 BPM</td><td>Easy — build the aerobic base</td></tr>
+              <tr><td>Weeks 3–4</td><td><span class="sets-badge">35 min</span></td><td>125–135 BPM</td><td>Slightly more effort</td></tr>
+              <tr><td>Weeks 5–8</td><td><span class="sets-badge">40 min</span></td><td>130–140 BPM</td><td>Comfortable but engaged</td></tr>
+              <tr><td>Weeks 9–12</td><td><span class="sets-badge">45 min</span></td><td>130–145 BPM</td><td>Add rowing intervals at end</td></tr>
+            </tbody>
+          </table>
+
+          <div class="section-header">🧘 Full Mobility Sequence (20 min)</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Duration</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">Hip Flexor Lunge Stretch</div><div class="exercise-cue">Deep lunge. Back knee down. Tuck pelvis. 90 sec each side.</div></td><td>90 sec/side</td><td><a href="https://www.youtube.com/results?search_query=hip flexor lunge stretch couch stretch" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Pigeon Pose (or Figure 4 on back)</div><div class="exercise-cue">External hip rotation. 2 min each side. Breathing.</div></td><td>2 min/side</td><td><a href="https://www.youtube.com/results?search_query=pigeon pose hip stretch" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Seated Hamstring Stretch / PNF</div><div class="exercise-cue">Contract for 5 sec, relax further into stretch. 3 rounds each side.</div></td><td>3×5s contract</td><td><a href="https://www.youtube.com/results?search_query=PNF hamstring stretch technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Thoracic Rotation (Quadruped)</div><div class="exercise-cue">Hand behind head. Rotate elbow to ceiling. T-spine mobility.</div></td><td>10/side</td><td><a href="https://www.youtube.com/results?search_query=thoracic rotation quadruped t-spine" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Ankle Dorsiflexion Drill</div><div class="exercise-cue">Wall drill. 10 reps each foot. Left ankle: check for pain.</div></td><td>10/side</td><td><a href="https://www.youtube.com/results?search_query=ankle dorsiflexion wall drill mobility" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Shoulder Sleeper Stretch</div><div class="exercise-cue">Side lying. Internal rotation stretch. 60 sec per side. Gentle.</div></td><td>60 sec/side</td><td><a href="https://www.youtube.com/results?search_query=sleeper stretch shoulder internal rotation" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Supine 90/90 Hip Stretch</div><div class="exercise-cue">Both legs. Switch sides. Deep hip internal/external work.</div></td><td>2 min/side</td><td><a href="https://www.youtube.com/results?search_query=supine 90 90 hip stretch" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DAY 4 — Lower Body 2 -->
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>🦵 Thursday — Lower Body + Core Stability</h4>
+          <div style="display:flex; gap:8px; align-items:center">
+            <span class="badge badge-muted">50 min</span>
+            <button class="btn btn-secondary btn-sm" onclick="logWorkoutDone('thu_lower')">✓ Mark Done</button>
+          </div>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">💪 Main Work</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Rest</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">A. Goblet Squat (DB)</div><div class="exercise-cue">Hold DB at chest. Heels wide. Deep as comfortable. Keep chest tall. Ankle mobility gates depth.</div></td><td><span class="sets-badge">4×10</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=goblet squat technique tutorial" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B1. Hip Thrust (Shoulders on Bench)</div><div class="exercise-cue">Drive hips to sky. Squeeze glutes hard at top. Chin tucked. Progress weight weekly.</div></td><td><span class="sets-badge">4×12</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=hip thrust shoulders on bench barbell" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B2. Step-Up (controlled)</div><div class="exercise-cue">12" box. Drive through heel. Single leg focus. No ankle pain on left — reduce height if needed.</div></td><td><span class="sets-badge">3×10/side</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=step up exercise technique unilateral" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C1. Nordic Curl Eccentric (Assisted)</div><div class="exercise-cue">Knees anchored. Lower slowly 3–5 sec. Catch yourself. Hamstring tendon strength. Key for knee health.</div></td><td><span class="sets-badge">3×5 eccentrics</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=nordic curl eccentric beginner assisted" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C2. Reverse Lunge</div><div class="exercise-cue">Step back. Front knee tracks over toes. No knee cave. Glute-dominant. Left ankle: monitor landing.</div></td><td><span class="sets-badge">3×10/side</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=reverse lunge technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">D1. Dead Bug</div><div class="exercise-cue">Lower back flat to floor. Opposite arm/leg extend. Slow. Breathe out on extend. Core anti-extension.</div></td><td><span class="sets-badge">3×8/side</span></td><td>45s</td><td><a href="https://www.youtube.com/results?search_query=dead bug core exercise technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">D2. Pallof Press (Band)</div><div class="exercise-cue">Anti-rotation core. Press out, hold 2 sec, return. Stand side-on to anchor. Core stability, not crunch.</div></td><td><span class="sets-badge">3×10/side</span></td><td>45s</td><td><a href="https://www.youtube.com/results?search_query=pallof press band anti rotation core" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+          <div class="section-header">🦵 VMO + Knee Protocol</div>
+          <table class="workout-table">
+            <tbody>
+              <tr><td><div class="exercise-name">Wall Sit</div><div class="exercise-cue">90° knees. Hold. Add time weekly. Quads + VMO. Stop if pain (not fatigue) occurs.</div></td><td><span class="sets-badge">3×30–45 sec</span></td><td><a href="https://www.youtube.com/results?search_query=wall sit exercise VMO quad" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Short-Arc Quad Extension</div><div class="exercise-cue">Rolled towel under knee. Extend last 30°. VMO activation. Knee rehab classic.</div></td><td><span class="sets-badge">3×15/side</span></td><td><a href="https://www.youtube.com/results?search_query=short arc quad extension VMO" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DAY 5 — Upper Body 2 -->
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>💪 Friday — Push/Pull + Carries + Posture</h4>
+          <div style="display:flex; gap:8px; align-items:center">
+            <span class="badge badge-muted">50 min</span>
+            <button class="btn btn-secondary btn-sm" onclick="logWorkoutDone('fri_upper')">✓ Mark Done</button>
+          </div>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">💪 Main Work</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Rest</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">A1. DB Chest Press (Flat or Slight Incline)</div><div class="exercise-cue">Scapulae retracted. Full range. Controlled eccentric (3 sec down). Shoulder-safe pressing.</div></td><td><span class="sets-badge">4×10</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=dumbbell chest press technique shoulder safe" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">A2. Seated Cable Row / Band Row</div><div class="exercise-cue">Chest up. Pull elbows back. Squeeze shoulder blades. 2:1 pull:push ratio always.</div></td><td><span class="sets-badge">4×12</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=seated cable row technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B1. Incline DB Press (30°)</div><div class="exercise-cue">Upper chest priority. Shoulders packed. No excessive arch.</div></td><td><span class="sets-badge">3×10</span></td><td>75s</td><td><a href="https://www.youtube.com/results?search_query=incline dumbbell press technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B2. Lat Pulldown / Band Pulldown</div><div class="exercise-cue">Lean slightly back. Pull bar to upper chest. Elbows drive down. Lats, not biceps.</div></td><td><span class="sets-badge">3×12</span></td><td>75s</td><td><a href="https://www.youtube.com/results?search_query=lat pulldown technique lats not biceps" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C. Farmer's Carry</div><div class="exercise-cue">Tall posture. Shoulders back and down. Walk 30m. Core braced. Grip + posture + traps. Wks 1-2: moderate weight.</div></td><td><span class="sets-badge">4×30m</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=farmer carry technique grip traps" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">D. KB/DB Arnold Press</div><div class="exercise-cue">Wks 3-4 only. Rotate through full shoulder range. Not heavy. Shoulder function.</div></td><td><span class="sets-badge">3×10</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=arnold press dumbbell technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+          <div class="section-header">🔒 Neck + Posture Protocol</div>
+          <table class="workout-table">
+            <tbody>
+              <tr><td><div class="exercise-name">Neck Isometric — All 4 Directions</div><div class="exercise-cue">Hand on forehead/temple/back of head. Push head into hand. Hold 5 sec. No movement. Cervical stability.</div></td><td><span class="sets-badge">3×5s each dir</span></td><td><a href="https://www.youtube.com/results?search_query=neck isometric strengthening exercises" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">Upper Trap Stretch</div><div class="exercise-cue">Ear to shoulder. Gentle. Hold 30 sec. Releases desk tension.</div></td><td><span class="sets-badge">30s each side</span></td><td></td></tr>
+              <tr><td><div class="exercise-name">Doorway T-Spine Opener</div><div class="exercise-cue">Stand in doorway. Arms on frame. Step through. Open chest. Counter forward head posture.</div></td><td><span class="sets-badge">3×30s</span></td><td><a href="https://www.youtube.com/results?search_query=doorway stretch thoracic opener chest" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Saturday & Sunday -->
+      <div class="grid-2">
+        <div class="workout-block">
+          <div class="workout-block-header">
+            <h4>🧘 Saturday — Active Recovery Walk + Foam Roll</h4>
+            <span class="badge badge-success">Low Intensity</span>
+          </div>
+          <div style="padding:16px 22px">
+            <div class="alert alert-success mb-12"><span>🚶</span><div><strong>Walk Protocol:</strong> 30–45 min outdoor walk. Conversational pace. Focus on posture: chin tucked, shoulders back, tall spine. This is recovery, not cardio.</div></div>
+            <div class="section-header" style="border-radius:var(--radius-sm); margin-bottom:8px">Foam Rolling Sequence (15 min)</div>
+            <ul style="padding:0 0 0 16px; color:var(--text-muted); font-size:0.85rem; line-height:2">
+              <li>🔴 IT Band — 60 sec/side (avoid if painful, use glute instead)</li>
+              <li>🔴 Thoracic Spine — 90 sec (roll up and down T-spine)</li>
+              <li>🔴 Lats — 60 sec/side</li>
+              <li>🔴 Hip Flexors — 60 sec/side</li>
+              <li>🔴 Calves — 60 sec/side (left calf: gentle)</li>
+              <li>🔴 Upper Traps / Neck — 45 sec/side</li>
+            </ul>
+          </div>
+        </div>
+        <div class="workout-block">
+          <div class="workout-block-header">
+            <h4>😴 Sunday — Rest + Weekly Review + Prep</h4>
+            <span class="badge badge-muted">Rest Day</span>
+          </div>
+          <div style="padding:16px 22px">
+            <div class="alert alert-gold mb-12"><span>📋</span><div><strong>Sunday Protocol:</strong> Rest is where growth happens. Still do morning mobility stack (10 min) and McGill Big 3.</div></div>
+            <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2">
+              <li>☑️ 2-hour meal prep session</li>
+              <li>☑️ Weekly review (see Weekly Review page)</li>
+              <li>☑️ Log measurements if it's your measurement day</li>
+              <li>☑️ Plan next week's schedule</li>
+              <li>☑️ Light 20-min walk if feeling good</li>
+              <li>☑️ Sleep 8+ hours. In bed by 10 PM.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end block1 -->
+
+    <!-- ══════════ BLOCK 2: WEEKS 5–8 ══════════ -->
+    <div class="tab-panel" id="block2">
+      <div class="alert alert-info mb-20">
+        <span>📈</span>
+        <div><strong>Block 2 Focus (Days 29–56):</strong> You've built the base. Now we add volume, introduce barbell work (deadlift, front squat), increase cardio, and start measurable strength progression. Rehab protocols continue but reduce in time as movement quality improves.</div>
+      </div>
+
+      <div class="grid-2 mb-20">
+        <div class="card">
+          <h4 class="mb-12">📋 Block 2 Changes</h4>
+          <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2; padding-left:16px">
+            <li>✅ Add barbell Romanian Deadlift</li>
+            <li>✅ Add Front Squat (or Goblet w/ more weight)</li>
+            <li>✅ Increase pulling volume (add pull-ups/chin-ups)</li>
+            <li>✅ Add rowing intervals (2×5 min Zone 3)</li>
+            <li>✅ Increase carries to 40m</li>
+            <li>✅ Add DB Shoulder Press (seated)</li>
+            <li>✅ Zone 2 cardio to 40 min</li>
+            <li>✅ Track all lifts — progressive overload begins</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 class="mb-12">📊 Progressive Overload Rules</h4>
+          <div class="alert alert-primary mb-8" style="margin-bottom:8px"><span>📈</span><div>Add weight when you can complete ALL sets with 2 reps in reserve (2 RIR). Add 5 lbs (lower body) or 2.5 lbs (upper body) at a time.</div></div>
+          <table class="workout-table">
+            <tbody>
+              <tr><td>Goblet Squat</td><td><span class="sets-badge">+5 lbs/wk</span></td></tr>
+              <tr><td>Hip Thrust</td><td><span class="sets-badge">+10 lbs/wk</span></td></tr>
+              <tr><td>DB Row</td><td><span class="sets-badge">+5 lbs/wk</span></td></tr>
+              <tr><td>DB Press</td><td><span class="sets-badge">+5 lbs/wk</span></td></tr>
+              <tr><td>RDL (Barbell)</td><td><span class="sets-badge">+10 lbs/wk</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>🦵 Monday — Lower Body Strength (Weeks 5–8)</h4>
+          <span class="badge badge-muted">60 min</span>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">💪 Main Work</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Rest</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">A. Front Squat or Goblet Squat (Heavy)</div><div class="exercise-cue">Elbows high on front squat. Full depth if mobility allows. Track weekly PRs.</div></td><td><span class="sets-badge">4×6–8</span></td><td>2 min</td><td><a href="https://www.youtube.com/results?search_query=front squat technique tutorial" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B. Barbell RDL</div><div class="exercise-cue">Hip hinge. Bar close to legs. Hamstrings stretch at bottom. Drive hips forward to stand.</div></td><td><span class="sets-badge">4×8</span></td><td>2 min</td><td><a href="https://www.youtube.com/results?search_query=barbell romanian deadlift RDL technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C. Bulgarian Split Squat</div><div class="exercise-cue">Rear foot elevated. Sink straight down. Front foot far enough forward. Quad + glute. Monitor left ankle.</div></td><td><span class="sets-badge">3×8/side</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=bulgarian split squat technique dumbbell" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">D. Hip Thrust (Loaded)</div><div class="exercise-cue">Barbell on hips or heavy DB. Full hip extension. Squeeze at top for 1 sec.</div></td><td><span class="sets-badge">3×10</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=barbell hip thrust technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">E. Single Leg Romanian Deadlift (DB)</div><div class="exercise-cue">Balance-dominant. Hinge. Left ankle proprioception challenge. Use support if needed.</div></td><td><span class="sets-badge">3×10/side</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=single leg RDL dumbbell balance" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">F. Suitcase Carry</div><div class="exercise-cue">One DB. Walk tall. Fight lateral lean. Oblique + core stability. Alternate sides.</div></td><td><span class="sets-badge">3×30m/side</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=suitcase carry core exercise" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>💪 Tuesday — Upper Body Hypertrophy (Weeks 5–8)</h4>
+          <span class="badge badge-muted">60 min</span>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">💪 Main Work</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Rest</th><th>Video</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">A1. Pull-Up / Assisted Pull-Up / Band</div><div class="exercise-cue">Full hang at bottom. Chest to bar. Elbows in. Pronated or supinated. Build to bodyweight.</div></td><td><span class="sets-badge">4×5–8</span></td><td>2 min</td><td><a href="https://www.youtube.com/results?search_query=pull up technique beginner progression" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">A2. DB Overhead Press (Seated)</div><div class="exercise-cue">Scapulae packed. Don't flare elbows too wide. Core engaged. Spinal neutral.</div></td><td><span class="sets-badge">4×10</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=seated dumbbell overhead press technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B1. DB Chest Press (Flat)</div><div class="exercise-cue">Increase weight from Block 1. 3 sec eccentric still.</div></td><td><span class="sets-badge">4×8</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=dumbbell flat press technique" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">B2. Chest-Supported DB Row</div><div class="exercise-cue">Face-down on incline bench. Eliminates lower back. Strict pull. Great for posture.</div></td><td><span class="sets-badge">4×12</span></td><td>90s</td><td><a href="https://www.youtube.com/results?search_query=chest supported row incline bench dumbbell" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">C. Cable Face Pull + External Rotation</div><div class="exercise-cue">Rope attachment at eye level. Pull to face, externally rotate wrists at end. Shoulders + rotator cuff.</div></td><td><span class="sets-badge">3×15</span></td><td>60s</td><td><a href="https://www.youtube.com/results?search_query=cable face pull with external rotation" target="_blank" class="video-ref">▶ Demo</a></td></tr>
+              <tr><td><div class="exercise-name">D. Tricep Dip (Bench) + Bicep Curl</div><div class="exercise-cue">Arms accessory. Control eccentric. Not to failure. Keep shoulder healthy.</div></td><td><span class="sets-badge">3×12 each</span></td><td>60s</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- end block2 -->
+
+    <!-- ══════════ BLOCK 3: WEEKS 9–12 ══════════ -->
+    <div class="tab-panel" id="block3">
+      <div class="alert alert-gold mb-20">
+        <span>💪</span>
+        <div><strong>Block 3 Focus (Days 57–90):</strong> Real strength training begins. Introduce conventional deadlift, barbell back squat (if mobility allows — otherwise trap bar), bench press. 4-day Upper/Lower split. This is where the visual changes accelerate alongside the functional gains.</div>
+      </div>
+
+      <div class="grid-2 mb-20">
+        <div class="card">
+          <h4 class="mb-12">📋 Block 3 Key Additions</h4>
+          <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2; padding-left:16px">
+            <li>✅ Conventional Deadlift (or Trap Bar DL)</li>
+            <li>✅ Barbell Back Squat (or continue front squat)</li>
+            <li>✅ Barbell Bench Press</li>
+            <li>✅ Weighted Chin-Ups</li>
+            <li>✅ Heavy Farmer's Carry (bodyweight+)</li>
+            <li>✅ Add interval cardio 1x/week</li>
+            <li>✅ Zone 2 to 45 min</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 class="mb-12">🏋️ Strength Standards — End of Phase 1</h4>
+          <table class="workout-table">
+            <thead><tr><th>Lift</th><th>Target (Week 12)</th></tr></thead>
+            <tbody>
+              <tr><td>Deadlift</td><td><span class="sets-badge">1.5× bodyweight</span></td></tr>
+              <tr><td>Front/Back Squat</td><td><span class="sets-badge">1.0× bodyweight</span></td></tr>
+              <tr><td>Bench Press</td><td><span class="sets-badge">0.75× bodyweight</span></td></tr>
+              <tr><td>Pull-Up</td><td><span class="sets-badge">5 clean reps BW</span></td></tr>
+              <tr><td>Hip Thrust</td><td><span class="sets-badge">1.5× bodyweight</span></td></tr>
+              <tr><td>Farmer Carry</td><td><span class="sets-badge">0.6× BW/hand × 40m</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>🏋️ Monday — Lower A: Squat Focus (Weeks 9–12)</h4>
+          <span class="badge badge-muted">65 min</span>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">💪 Main Work</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Rest</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">A. Back Squat or Trap Bar Squat</div><div class="exercise-cue">Work up to heavy 4–5 sets. Start 60% 1RM, add 5–10% weekly. Depth to parallel or below.</div></td><td><span class="sets-badge">5×5</span></td><td>2.5 min</td><td>Track weight each week</td></tr>
+              <tr><td><div class="exercise-name">B. Romanian Deadlift (Barbell)</div><div class="exercise-cue">Accessory to main squat. Moderate weight. 4 sets.</div></td><td><span class="sets-badge">4×8</span></td><td>2 min</td><td>Posterior chain</td></tr>
+              <tr><td><div class="exercise-name">C. Bulgarian Split Squat (Heavy)</div><div class="exercise-cue">DBs in hands. Maximize glute + quad. Add weight from Block 2.</div></td><td><span class="sets-badge">3×8/side</span></td><td>90s</td><td>Unilateral balance</td></tr>
+              <tr><td><div class="exercise-name">D. Leg Curl (Machine or Nordic)</div><div class="exercise-cue">Hamstring isolation. Slow eccentric. Injury prevention.</div></td><td><span class="sets-badge">3×12</span></td><td>60s</td><td></td></tr>
+              <tr><td><div class="exercise-name">E. Heavy Farmer's Carry</div><div class="exercise-cue">Near max grip. 40m. Posture must remain perfect.</div></td><td><span class="sets-badge">4×40m</span></td><td>90s</td><td>Grip, core, traps</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="workout-block">
+        <div class="workout-block-header">
+          <h4>🏋️ Wednesday — Lower B: Deadlift Focus (Weeks 9–12)</h4>
+          <span class="badge badge-muted">65 min</span>
+        </div>
+        <div class="exercise-section">
+          <div class="section-header">💪 Main Work</div>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Sets×Reps</th><th>Rest</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><div class="exercise-name">A. Conventional Deadlift (or Trap Bar)</div><div class="exercise-cue">Setup: bar over mid-foot, hinge to bar, chest up, brace, drive legs through floor. No rounding lower back.</div></td><td><span class="sets-badge">5×3–5</span></td><td>3 min</td><td>Track weekly PRs</td></tr>
+              <tr><td><div class="exercise-name">B. Hip Thrust (Barbell)</div><div class="exercise-cue">Heavy. Drive for power. Glute max activation. King of glute exercises.</div></td><td><span class="sets-badge">4×8</span></td><td>2 min</td><td></td></tr>
+              <tr><td><div class="exercise-name">C. Single-Leg Press or Step-Up</div><div class="exercise-cue">Unilateral. Left/right balance. Left ankle: monitor throughout.</div></td><td><span class="sets-badge">3×10/side</span></td><td>90s</td><td></td></tr>
+              <tr><td><div class="exercise-name">D. Pallof Press + Deadbug Superset</div><div class="exercise-cue">Anti-rotation + anti-extension. Core work that transfers to the lifts.</div></td><td><span class="sets-badge">3×10 each</span></td><td>60s</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- end block3 -->
+
+    <!-- ── END OF PHASE NOTE ── -->
+    <div class="card mt-32" style="border-color:var(--gold-dim); background:rgba(255,215,0,0.03)">
+      <div class="card-header">
+        <h3>🏆 End of Phase 1 Assessment</h3>
+        <span class="badge badge-gold">Day 90</span>
+      </div>
+      <p class="mb-16">After completing Day 90, run this full assessment before starting Phase 2:</p>
+      <div class="grid-2">
+        <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2; padding-left:16px">
+          <li>📏 Take all measurements (weight, waist, hips, chest, arms)</li>
+          <li>📸 Progress photos (front, side, back)</li>
+          <li>🧘 Mobility test: Can you deep squat? Reach overhead? Touch toes?</li>
+          <li>🦵 Single-leg balance: 30 sec each side, eyes closed?</li>
+        </ul>
+        <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2; padding-left:16px">
+          <li>💪 Test 5RM on key lifts</li>
+          <li>🦴 Pain audit: Rate lower back, shoulders, knees, ankle (0-10)</li>
+          <li>❤️ Row 2,000m — note time</li>
+          <li>📝 Complete Week 12 review page</li>
+        </ul>
+      </div>
+      <div class="mt-16">
+        <a href="phase2.html" class="btn btn-gold">Proceed to Phase 2 →</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/js/app.js"></script>
+<script>
+  function logWorkoutDone(id) {
+    const dateKey = OP.getTodayKey();
+    OP.logWorkout(dateKey, { id, completedAt: new Date().toISOString() });
+    OP.toast('Workout logged! 🔥 Great work, Joseph.');
+  }
+  // Activate tabs on this page
+  document.querySelectorAll('#blockTabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#blockTabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === target));
+    });
+  });
+</script>
+</body>
+</html>

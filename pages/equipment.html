@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equipment Guide | Operation Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/print.css" />
+</head>
+<body>
+<div class="overlay-bg" id="navOverlay"></div>
+<div class="app-layout">
+  <header class="site-header">
+    <div class="header-logo"><div class="logo-icon">⚡</div><span>OPERATION <span>PRIME</span></span></div>
+    <div class="header-meta"><span class="day-badge" data-day-number>Day 1</span><button class="menu-toggle" id="menuToggle">☰</button></div>
+  </header>
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <a href="../index.html" class="nav-link"><span class="nav-icon">⚡</span> Dashboard</a>
+      <a href="calendar.html" class="nav-link"><span class="nav-icon">📅</span> Calendar</a>
+      <a href="habits.html" class="nav-link"><span class="nav-icon">✅</span> Habit Tracker</a>
+      <a href="tracker.html" class="nav-link"><span class="nav-icon">📊</span> Progress</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Training</div>
+      <a href="phase1.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 1</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Protocols</div>
+      <a href="rehab.html" class="nav-link"><span class="nav-icon">🦴</span> Rehab Library</a>
+      <a href="mobility.html" class="nav-link"><span class="nav-icon">🧘</span> Mobility Library</a>
+      <a href="daily.html" class="nav-link"><span class="nav-icon">🕐</span> Daily Schedule</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Lifestyle</div>
+      <a href="nutrition.html" class="nav-link"><span class="nav-icon">🥩</span> Nutrition System</a>
+      <a href="equipment.html" class="nav-link active"><span class="nav-icon">🛒</span> Equipment Guide</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="label">🛒 Home Arsenal</div>
+      <h1>Equipment <span class="gradient-text">Guide</span></h1>
+      <p>Build your home training environment in tiers. Start with the essentials — add as you progress.</p>
+    </div>
+
+    <div class="alert alert-info mb-32"><span>💡</span><div><strong>You don't need everything at once.</strong> Tier 1 costs ~$120 and covers 80% of Phase 1 training. Tier 2 adds serious versatility. Tier 3 builds a world-class home gym. Buy in order, not all at once.</div></div>
+
+    <!-- Cost summary -->
+    <div class="stats-grid mb-32">
+      <div class="stat-card card-glow">
+        <div class="label">Tier 1 — Essentials</div>
+        <div class="stat-value primary">~$120</div>
+        <div class="text-muted text-sm">Covers Phase 1 home work</div>
+      </div>
+      <div class="stat-card card-gold">
+        <div class="label">Tier 2 — Upgrade</div>
+        <div class="stat-value gold">~$600</div>
+        <div class="text-muted text-sm">Phase 2+ serious training</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Tier 3 — Elite</div>
+        <div class="stat-value">~$3,000</div>
+        <div class="text-muted text-sm">Full home gym setup</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Gym Membership</div>
+        <div class="stat-value success">Keep It</div>
+        <div class="text-muted text-sm">Still best for barbells + cables</div>
+      </div>
+    </div>
+
+    <div class="accordion" id="equipAccordion">
+
+      <!-- Tier 1 -->
+      <div class="accordion-item open">
+        <button class="accordion-header">
+          <span><span class="badge badge-primary" style="margin-right:8px">Tier 1</span> 🟢 Essentials — Buy These First (~$120)</span>
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <p class="text-sm text-muted mb-16">These cover 100% of mobility work, 80% of Phase 1 home exercises, and the rehab protocols. Order immediately.</p>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:16px">
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🔗</div>
+              <h4>Resistance Bands Set</h4>
+              <div class="badge badge-primary mb-8">~$30</div>
+              <p class="text-sm text-muted mb-8">5-band set with loops AND pull-apart bands. Essential for: monster walks, clamshells, band pull-aparts, face pulls, terminal knee extensions, lateral band walks.</p>
+              <div class="text-xs text-muted"><strong>Brands:</strong> Perform Better, Rogue, Amazon Basics<br><strong>Get:</strong> Loop bands (light/medium/heavy) + long resistance bands</div>
+              <div class="badge badge-gold mt-8">Phase 1 — Week 1</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🧻</div>
+              <h4>Foam Roller</h4>
+              <div class="badge badge-primary mb-8">~$25</div>
+              <p class="text-sm text-muted mb-8">High-density, full length (36"). Used daily for thoracic extension, IT band, hip flexors, quads, calves. Gets harder to skip once you feel the benefit.</p>
+              <div class="text-xs text-muted"><strong>Brands:</strong> TriggerPoint GRID, Amazon Basics, Yes4All<br><strong>Avoid:</strong> Hollow, lightweight rollers — they compress too easily</div>
+              <div class="badge badge-gold mt-8">Phase 1 — Week 1</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🏋️</div>
+              <h4>Doorway Pull-Up Bar</h4>
+              <div class="badge badge-primary mb-8">~$35</div>
+              <p class="text-sm text-muted mb-8">Non-negotiable. Dead hangs for spinal decompression (every day). Pull-ups starting Week 5. Scapular pull-ups, dead hang shoulder rehab — used in every Phase 1 upper session.</p>
+              <div class="text-xs text-muted"><strong>Brands:</strong> Iron Gym, Perfect Fitness, Rogue MT<br><strong>Buy 300lb+ rated</strong> — cheap ones fail</div>
+              <div class="badge badge-gold mt-8">Phase 1 — Week 1</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🏃</div>
+              <h4>Jump Rope</h4>
+              <div class="badge badge-primary mb-8">~$15</div>
+              <p class="text-sm text-muted mb-8">Speed rope for future conditioning. Gentle ankle warm-up (Phase 2+, not Week 1 — ankle caution). Light enough for travel. Excellent Zone 2 fasted cardio later.</p>
+              <div class="text-xs text-muted"><strong>Brands:</strong> CrossRope, WOD Nation<br><strong>Note:</strong> Not for Grade 3 ankle until Month 4+</div>
+              <div class="badge badge-warning mt-8">Phase 2 Ready</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">⚖️</div>
+              <h4>Digital Food Scale</h4>
+              <div class="badge badge-primary mb-8">~$12</div>
+              <p class="text-sm text-muted mb-8">The single highest-ROI nutrition purchase. Guessing macros is why most people fail. Weigh everything for 8 weeks — then you'll have accurate intuition forever.</p>
+              <div class="text-xs text-muted"><strong>Brands:</strong> OXO, Etekcity, Amazon Basics<br><strong>Get:</strong> 0.1g precision, at least 11lb capacity</div>
+              <div class="badge badge-gold mt-8">Day 1</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="accordion-item">
+        <button class="accordion-header">
+          <span><span class="badge badge-gold" style="margin-right:8px">Tier 2</span> 🟡 Serious Upgrades — Phase 2 Ready (~$600)</span>
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <p class="text-sm text-muted mb-16">Buy these by Month 3–4. These items dramatically expand what you can do at home — especially on rest days when gym isn't practical.</p>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:16px">
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🏋️</div>
+              <h4>Adjustable Dumbbells (5–52.5 lbs)</h4>
+              <div class="badge badge-gold mb-8">~$250–350</div>
+              <p class="text-sm text-muted mb-8">Replaces 10+ pairs. Select-a-weight design. Covers DB rows, presses, RDLs, lateral raises, farmer carries, Arnold presses, goblet squats, and more.</p>
+              <div class="text-xs text-muted"><strong>Best:</strong> Bowflex SelectTech 552, PowerBlock Elite<br><strong>Budget:</strong> Yes4All adjustable (separate plates)</div>
+              <div class="badge badge-primary mt-8">High Priority</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">💆</div>
+              <h4>Massage Gun</h4>
+              <div class="badge badge-gold mb-8">~$80–150</div>
+              <p class="text-sm text-muted mb-8">Daily recovery tool. 5–10 minutes on sore muscles dramatically reduces DOMS. Use on glutes, quads, upper traps, calves. Avoid bony areas and spine directly.</p>
+              <div class="text-xs text-muted"><strong>Best:</strong> Theragun Mini, Hypervolt Go<br><strong>Budget:</strong> Renpho, Bob and Brad models on Amazon</div>
+              <div class="badge badge-primary mt-8">Recovery Game-Changer</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🟡</div>
+              <h4>BOSU Ball</h4>
+              <div class="badge badge-gold mb-8">~$80–120</div>
+              <p class="text-sm text-muted mb-8">Proprioception training — critical for your ankle rehab Phase 2 (Week 8+). Single-leg balance, BOSU squats, push-ups. Replaces wobble board for ankle stability.</p>
+              <div class="text-xs text-muted"><strong>Brands:</strong> BOSU Pro (commercial), Amazon alternatives<br><strong>Get:</strong> 26" diameter, 300lb+ rated</div>
+              <div class="badge badge-warning mt-8">Ankle Protocol Required</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🎯</div>
+              <h4>Gymnastic Rings</h4>
+              <div class="badge badge-gold mb-8">~$30–50</div>
+              <p class="text-sm text-muted mb-8">Hang anywhere. Extremely versatile — ring rows (great shoulder rehab variation), dips (Phase 2+), push-ups (advanced), muscle-ups later. Portable. Compact. High value.</p>
+              <div class="text-xs text-muted"><strong>Brands:</strong> Rogue, Nayoya, Yes4All<br><strong>Get:</strong> Wood rings, 1.1" diameter, 2m+ straps</div>
+              <div class="badge badge-primary mt-8">Phase 2 Versatility</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">⚽</div>
+              <h4>Lacrosse Ball</h4>
+              <div class="badge badge-gold mb-8">~$8–15</div>
+              <p class="text-sm text-muted mb-8">Deep tissue release for glutes, plantar fascia, pec minor, subscapularis, upper trap, IT band, and thoracic spine (two balls taped together = peanut). Use before mobility work.</p>
+              <div class="text-xs text-muted"><strong>Any lacrosse ball works.</strong> Get 2 so you can tape them together for spine work.</div>
+              <div class="badge badge-primary mt-8">Buy Now — Cheap</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🚴</div>
+              <h4>Rowing Machine</h4>
+              <div class="badge badge-gold mb-8">~$300–800</div>
+              <p class="text-sm text-muted mb-8">The best home cardio tool for this program. Full body, zero impact, shoulder-safe, posture-reinforcing. 30-min rowing sessions replace all Zone 2 cardio. Concept2 BikeErg also works.</p>
+              <div class="text-xs text-muted"><strong>Best:</strong> Concept2 Model D (resells for full price)<br><strong>Budget:</strong> LifeFitness RW700, Sunny Health</div>
+              <div class="badge badge-warning mt-8">Significant Purchase</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="accordion-item">
+        <button class="accordion-header">
+          <span><span class="badge badge-warning" style="margin-right:8px">Tier 3</span> 🔴 Elite Home Gym (~$3,000+)</span>
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <p class="text-sm text-muted mb-16">Phase 3–4 level. If you're serious about eliminating gym commute and training at the highest level year-round. Build this over 6–12 months.</p>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:16px">
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🏗️</div>
+              <h4>Power Rack + Barbell + Plates</h4>
+              <div class="badge badge-warning mb-8">~$800–1,500</div>
+              <p class="text-sm text-muted mb-8">The cornerstone of serious strength training. Squat, bench, deadlift, OHP, pull-ups all from one unit. Buy a 7' barbell and start with 300 lbs of bumper plates.</p>
+              <div class="text-xs text-muted"><strong>Best:</strong> Rogue RML-390F, Rep PR-4000<br><strong>Budget:</strong> Titan T-3, PowerMark</div>
+              <div class="badge badge-primary mt-8">Phase 3 Goal</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🚶</div>
+              <h4>Walking Pad / Under-Desk Treadmill</h4>
+              <div class="badge badge-warning mb-8">~$300–600</div>
+              <p class="text-sm text-muted mb-8">Walk during meetings and shallow work. +3,000–5,000 steps/day without trying. The passive fat-loss hack. Requires standing desk (or standing laptop riser).</p>
+              <div class="text-xs text-muted"><strong>Best:</strong> WalkingPad A1 Pro, Urevo<br><strong>Also get:</strong> Monitor/laptop riser for standing desk</div>
+              <div class="badge badge-gold mt-8">NEAT Booster</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🧖</div>
+              <h4>Sauna (Infrared)</h4>
+              <div class="badge badge-warning mb-8">~$800–2,000</div>
+              <p class="text-sm text-muted mb-8">Recovery, cardiovascular health, cortisol reduction, improved sleep. 4× weekly sauna (20 min at 170°F) shows similar cardiovascular benefits to moderate cardio in studies.</p>
+              <div class="text-xs text-muted"><strong>Portable:</strong> Sauna Space, Relax Sauna (~$500)<br><strong>Cabin:</strong> Sunlighten, Clearlight (higher end)</div>
+              <div class="badge badge-success mt-8">Longevity Tool</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🖥️</div>
+              <h4>Standing Desk (Electric)</h4>
+              <div class="badge badge-warning mb-8">~$400–800</div>
+              <p class="text-sm text-muted mb-8">Work in alternating positions: seated 45 min, standing 20 min. Essential for the desk protocol. Electric height adjust — manual ones are frustrating and rarely used.</p>
+              <div class="text-xs text-muted"><strong>Best:</strong> Uplift V2, Flexispot E7<br><strong>Budget:</strong> Flexispot E5, Amazon basics electric</div>
+              <div class="badge badge-primary mt-8">Desk Worker Must-Have</div>
+            </div>
+
+            <div class="card" style="padding:20px">
+              <div style="font-size:2rem; margin-bottom:8px">🎯</div>
+              <h4>Cable Machine (Functional Trainer)</h4>
+              <div class="badge badge-warning mb-8">~$600–1,200</div>
+              <p class="text-sm text-muted mb-8">Replicates cable stack from commercial gym. Face pulls, pallof press, cable rows, pulldowns, triceps, rotator cuff work — all from home. The final piece for shoulder health at home.</p>
+              <div class="text-xs text-muted"><strong>Best:</strong> REP FT-100, Inspire FT2<br><strong>Budget:</strong> BodyCraft HFT, XMark XM-7626</div>
+              <div class="badge badge-gold mt-8">Shoulder Health</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Recovery Tools -->
+      <div class="accordion-item">
+        <button class="accordion-header">
+          <span><span class="badge badge-success" style="margin-right:8px">Recovery</span> 🧊 Recovery Tools — Buy When Ready</span>
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px">
+            <div class="card" style="padding:16px"><div style="font-size:1.8rem">🧊</div><h5 style="margin:8px 0 4px">Ice / Cold Plunge Tub</h5><div class="badge badge-success mb-6">~$100–3,000</div><p class="text-xs text-muted">DIY chest freezer (~$200) or dedicated tub. 3–5 min at 50–59°F. 3×/week minimum for serious recovery. Incredible for DOMS and inflammation post-training.</p></div>
+            <div class="card" style="padding:16px"><div style="font-size:1.8rem">🔴</div><h5 style="margin:8px 0 4px">Red Light Therapy Panel</h5><div class="badge badge-success mb-6">~$200–500</div><p class="text-xs text-muted">Photobiomodulation. 10–20 min/day on sore areas + face. Reduces inflammation, improves skin, supports joint recovery. Use AM after mobility work.</p></div>
+            <div class="card" style="padding:16px"><div style="font-size:1.8rem">🦵</div><h5 style="margin:8px 0 4px">Percussion Massager (Upgrade)</h5><div class="badge badge-success mb-6">~$250–400</div><p class="text-xs text-muted">Theragun Pro or Hypervolt 2 Pro — deeper amplitude, better attachments. Worth it if you train 4+ days/week and value recovery.</p></div>
+            <div class="card" style="padding:16px"><div style="font-size:1.8rem">🩺</div><h5 style="margin:8px 0 4px">Theraband / Floss Bands</h5><div class="badge badge-success mb-6">~$20–30</div><p class="text-xs text-muted">Voodoo floss for ankle and knee compression + mobilization. 1–2 min wrapped tight, move through range, remove. Excellent for scar tissue and stiffness.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nutrition Tools -->
+      <div class="accordion-item">
+        <button class="accordion-header">
+          <span><span class="badge badge-warning" style="margin-right:8px">Kitchen</span> 🍳 Nutrition Equipment</span>
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px">
+            <div class="card" style="padding:16px"><div style="font-size:1.8rem">🍳</div><h5 style="margin:8px 0 4px">Glass Meal Prep Containers (Set of 20)</h5><div class="badge badge-warning mb-6">~$50–70</div><p class="text-xs text-muted">Store 5 days of food. Microwave safe. BPA-free. No plastic leaching into prepped meals. Costco or Amazon. Get divided containers too.</p></div>
+            <div class="card" style="padding:16px"><div style="font-size:1.8rem">🥘</div><h5 style="margin:8px 0 4px">Instant Pot / Slow Cooker</h5><div class="badge badge-warning mb-6">~$80–120</div><p class="text-xs text-muted">Cook 4 lbs of chicken in 15 minutes pressure. Bone broth, stews, rice — hands-off bulk cooking. The meal prep hero.</p></div>
+            <div class="card" style="padding:16px"><div style="font-size:1.8rem">🥗</div><h5 style="margin:8px 0 4px">High-Speed Blender</h5><div class="badge badge-warning mb-6">~$80–500</div><p class="text-xs text-muted">Smoothies, protein shakes, sauces. Vitamix lasts 20 years. Nutribullet does 90% of the work for $80. Get what you'll actually use.</p></div>
+            <div class="card" style="padding:16px"><div style="font-size:1.8rem">💊</div><h5 style="margin:8px 0 4px">Weekly Supplement Organizer</h5><div class="badge badge-warning mb-6">~$10–20</div><p class="text-xs text-muted">AM/PM compartments for 7 days. Never miss a supplement. Takes 10 min on Sunday to fill. Removes daily cognitive load from supplement protocol.</p></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end accordion -->
+
+    <!-- Gym Priority -->
+    <div class="card mt-32">
+      <div class="card-header"><h3>🏋️ Commercial Gym — What to Prioritize</h3></div>
+      <p class="text-sm text-muted mb-16">Keep your gym membership. These are the assets your home setup can't fully replicate (yet):</p>
+      <div class="grid-2">
+        <div>
+          <h5 class="mb-8" style="color:var(--primary)">Essential Gym Equipment</h5>
+          <ul style="line-height:2.5; font-size:0.85rem">
+            <li>🏋️ <strong>Barbell:</strong> Deadlift, squat, bench, OHP</li>
+            <li>🔗 <strong>Cable stack:</strong> Face pulls, rows, pulldowns</li>
+            <li>🚴 <strong>Cardio equipment:</strong> Rower, bike, ski erg</li>
+            <li>🏊 <strong>Pool:</strong> Zero-impact Zone 2 (bonus)</li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="mb-8" style="color:var(--gold)">Use These on Training Days</h5>
+          <ul style="line-height:2.5; font-size:0.85rem">
+            <li>📅 Mon/Thu = Lower body + barbell work</li>
+            <li>📅 Tue/Fri = Upper body + cable machine</li>
+            <li>📅 Wed/Sat = Home mobility + rower/walk</li>
+            <li>📅 Sun = Full rest or long walk</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    OP.initAccordions('equipAccordion');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobility Library | Operation Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/print.css" />
+</head>
+<body>
+<div class="overlay-bg" id="navOverlay"></div>
+<div class="app-layout">
+  <header class="site-header">
+    <div class="header-logo"><div class="logo-icon">⚡</div><span>OPERATION <span>PRIME</span></span></div>
+    <div class="header-meta"><span class="day-badge" data-day-number>Day 1</span><button class="menu-toggle" id="menuToggle">☰</button></div>
+  </header>
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <a href="../index.html" class="nav-link"><span class="nav-icon">⚡</span> Dashboard</a>
+      <a href="calendar.html" class="nav-link"><span class="nav-icon">📅</span> Calendar</a>
+      <a href="habits.html" class="nav-link"><span class="nav-icon">✅</span> Habit Tracker</a>
+      <a href="tracker.html" class="nav-link"><span class="nav-icon">📊</span> Progress</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Training</div>
+      <a href="phase1.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 1</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Protocols</div>
+      <a href="rehab.html" class="nav-link"><span class="nav-icon">🦴</span> Rehab Library</a>
+      <a href="mobility.html" class="nav-link active"><span class="nav-icon">🧘</span> Mobility Library</a>
+      <a href="daily.html" class="nav-link"><span class="nav-icon">🕐</span> Daily Schedule</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Lifestyle</div>
+      <a href="nutrition.html" class="nav-link"><span class="nav-icon">🥩</span> Nutrition System</a>
+      <a href="equipment.html" class="nav-link"><span class="nav-icon">🛒</span> Equipment Guide</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="label">🧘 Movement Quality System</div>
+      <h1>Mobility <span class="gradient-text">Library</span></h1>
+      <p>Mobility is training. Stiffness is the enemy. Build range — then express strength through it.</p>
+    </div>
+
+    <div class="alert alert-warning mb-32"><span>⚡</span><div><strong>Movement First, Load Second.</strong> Pain-free range of motion at every joint is a prerequisite for heavy training. If an area feels tight, stay there — don't rush past it.</div></div>
+
+    <!-- Tabs -->
+    <div class="tabs mb-0" id="mobilityTabs">
+      <button class="tab active" data-tab="morning">🌅 Morning (10 min)</button>
+      <button class="tab" data-tab="preworkout">🏋️ Pre-Workout (8 min)</button>
+      <button class="tab" data-tab="postworkout">🧊 Post-Workout (10 min)</button>
+      <button class="tab" data-tab="weekly">📅 Weekly Deep Work</button>
+      <button class="tab" data-tab="tests">📏 Mobility Tests</button>
+    </div>
+
+    <!-- Morning Mobility -->
+    <div class="tab-panel active" id="panel-morning">
+      <div class="card mb-24">
+        <div class="phase-banner" style="background: linear-gradient(135deg, var(--gold), var(--warning));">
+          <div class="phase-number">🌅</div>
+          <div>
+            <h2 style="color:var(--bg-base)">Morning Mobility Stack</h2>
+            <p style="color:rgba(0,0,0,0.7)">10 minutes. Every single day. Before phone, before coffee. This sets the tone.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mb-24"><span>💡</span><div>Do this sequence on the floor immediately after waking. Inhale through nose, exhale through mouth. Move slowly — you're waking your nervous system, not racing.</div></div>
+
+      <table class="workout-table mb-32">
+        <thead>
+          <tr><th>#</th><th>Exercise</th><th>Sets × Reps / Time</th><th>Focus</th><th>Video</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-primary"><strong>1</strong></td>
+            <td><strong>90/90 Hip Switch</strong><br><span class="text-xs">Sit on floor, both legs bent at 90°. Rotate hips side to side, keeping spine tall.</span></td>
+            <td>2 × 5/side</td>
+            <td>Hip IR/ER mobility</td>
+            <td><a href="https://www.youtube.com/results?search_query=90+90+hip+switch+mobility" target="_blank" class="btn btn-secondary btn-xs">▶ Watch</a></td>
+          </tr>
+          <tr>
+            <td class="text-primary"><strong>2</strong></td>
+            <td><strong>Cat-Cow</strong><br><span class="text-xs">On all fours. Max flexion, hold 2 sec. Max extension, hold 2 sec. Breathe into each position.</span></td>
+            <td>1 × 10 reps</td>
+            <td>Spine hydration</td>
+            <td><a href="https://www.youtube.com/results?search_query=cat+cow+stretch+spine+mobility" target="_blank" class="btn btn-secondary btn-xs">▶ Watch</a></td>
+          </tr>
+          <tr>
+            <td class="text-primary"><strong>3</strong></td>
+            <td><strong>Child's Pose with Lateral Reach</strong><br><span class="text-xs">Hips to heels. Walk hands left, hold 20 sec. Center, hold 20 sec. Walk right, hold 20 sec.</span></td>
+            <td>1 × 20 sec each</td>
+            <td>Lat / thoracic / hip</td>
+            <td><a href="https://www.youtube.com/results?search_query=child+pose+lateral+reach+mobility" target="_blank" class="btn btn-secondary btn-xs">▶ Watch</a></td>
+          </tr>
+          <tr>
+            <td class="text-primary"><strong>4</strong></td>
+            <td><strong>Chin Tuck + Neck Rotation</strong><br><span class="text-xs">Supine. Chin tuck × 10. Then look full left, hold 3 sec. Full right, hold 3 sec. Repeat ×5.</span></td>
+            <td>2 × 5/side</td>
+            <td>Cervical mobility / FHP fix</td>
+            <td><a href="https://www.youtube.com/results?search_query=chin+tuck+exercise+forward+head+posture" target="_blank" class="btn btn-secondary btn-xs">▶ Watch</a></td>
+          </tr>
+          <tr>
+            <td class="text-primary"><strong>5</strong></td>
+            <td><strong>World's Greatest Stretch</strong><br><span class="text-xs">Lunge position: rotate toward front leg, reach sky with top arm. Hold 3 sec, repeat. Both sides.</span></td>
+            <td>3/side</td>
+            <td>Full body integration</td>
+            <td><a href="https://www.youtube.com/results?search_query=world%27s+greatest+stretch+mobility" target="_blank" class="btn btn-secondary btn-xs">▶ Watch</a></td>
+          </tr>
+          <tr>
+            <td class="text-primary"><strong>6</strong></td>
+            <td><strong>Ankle Circles + Alphabet</strong><br><span class="text-xs">Seated. Draw alphabet with big toe for each foot. Then 10 large circles CW, 10 CCW per ankle.</span></td>
+            <td>1 set each ankle</td>
+            <td>Ankle mobility (Grade 3 history)</td>
+            <td><a href="https://www.youtube.com/results?search_query=ankle+circles+mobility+exercise" target="_blank" class="btn btn-secondary btn-xs">▶ Watch</a></td>
+          </tr>
+          <tr>
+            <td class="text-primary"><strong>7</strong></td>
+            <td><strong>Thoracic Extension over Foam Roller</strong><br><span class="text-xs">Roller perpendicular to spine. Work from mid-back to upper back. 5–7 positions, 3 breaths each.</span></td>
+            <td>3 breaths × 5 spots</td>
+            <td>Thoracic extension (desk posture)</td>
+            <td><a href="https://www.youtube.com/results?search_query=thoracic+extension+foam+roller+desk" target="_blank" class="btn btn-secondary btn-xs">▶ Watch</a></td>
+          </tr>
+          <tr>
+            <td class="text-gold"><strong>8</strong></td>
+            <td><strong>Deep Squat Hold</strong><br><span class="text-xs">Feet shoulder width, toes ~30° out. Sink as low as you can, hold. Use pole/door for help initially.</span></td>
+            <td>3 × 20–60 sec</td>
+            <td>Hip / ankle / groin</td>
+            <td><a href="https://www.youtube.com/results?search_query=deep+squat+hold+mobility+practice" target="_blank" class="btn btn-secondary btn-xs">▶ Watch</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-info"><span>📈</span><div><strong>Goal Progression:</strong> By Week 8 — hold a full depth squat for 60 seconds without support. By Week 16 — perform full depth squat with arms overhead comfortably.</div></div>
+    </div>
+
+    <!-- Pre-Workout Mobility -->
+    <div class="tab-panel" id="panel-preworkout">
+      <div class="card mb-24">
+        <div class="phase-banner" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+          <div class="phase-number">🏋️</div>
+          <div>
+            <h2>Pre-Workout Activation</h2>
+            <p style="color:rgba(255,255,255,0.8)">8 minutes. Before every training session. These aren't optional warm-up sets — this is CNS priming.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2 mb-24">
+        <div class="card">
+          <h4 class="mb-12" style="color:var(--primary)">🦵 Lower Body Day Warm-Up</h4>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Volume</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Hip 90/90</strong> — both sides</td><td>5/side</td></tr>
+              <tr><td><strong>Ankle dorsiflexion drill</strong> (wall)</td><td>10/side</td></tr>
+              <tr><td><strong>Cossack squat</strong> (bodyweight)</td><td>5/side</td></tr>
+              <tr><td><strong>Hip flexor stretch</strong> (kneeling)</td><td>30 sec/side</td></tr>
+              <tr><td><strong>Glute bridge</strong> (bodyweight activation)</td><td>20 reps slow</td></tr>
+              <tr><td><strong>Monster walk</strong> (band, 10m each direction)</td><td>2 lengths</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h4 class="mb-12" style="color:var(--secondary)">💪 Upper Body Day Warm-Up</h4>
+          <table class="workout-table">
+            <thead><tr><th>Exercise</th><th>Volume</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Shoulder CARs</strong> (controlled articular rotations)</td><td>5/direction</td></tr>
+              <tr><td><strong>Band pull-apart</strong></td><td>2 × 15</td></tr>
+              <tr><td><strong>Wall slide</strong></td><td>2 × 10</td></tr>
+              <tr><td><strong>Thoracic rotation</strong> (quadruped)</td><td>8/side</td></tr>
+              <tr><td><strong>Doorway pec stretch</strong> (3 heights)</td><td>20 sec each</td></tr>
+              <tr><td><strong>Chin tucks × 10</strong> + neck side bend 20 sec/side</td><td>1 set each</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 class="mb-12" style="color:var(--gold)">🏃 Zone 2 / Conditioning Day Warm-Up</h4>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Volume</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Leg swings</strong> (front/back + side/side)</td><td>10/direction/leg</td><td>Hold wall for balance</td></tr>
+            <tr><td><strong>Hip circles</strong></td><td>10/direction</td><td>Slow and large</td></tr>
+            <tr><td><strong>Ankle bounces</strong></td><td>20 total</td><td>Gentle — no jumping yet</td></tr>
+            <tr><td><strong>Walking knee hugs</strong></td><td>10m</td><td>Slow and controlled</td></tr>
+            <tr><td><strong>Lateral shuffles</strong></td><td>10m × 2</td><td>Week 8+ only — ankle caution</td></tr>
+            <tr><td><strong>5 min Zone 1 walk</strong> to start rower/bike</td><td>5 min</td><td>RPE 3/10</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Post-Workout -->
+    <div class="tab-panel" id="panel-postworkout">
+      <div class="card mb-24">
+        <div class="phase-banner" style="background: linear-gradient(135deg, #1a3a2a, #0a2a1a);">
+          <div class="phase-number">🧊</div>
+          <div>
+            <h2 style="color:var(--success)">Post-Workout Cool-Down</h2>
+            <p style="color:rgba(255,255,255,0.7)">10 minutes. Non-negotiable. This is where recovery begins. Skip warm-up, you injure yourself. Skip cool-down, you slow adaptation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2 mb-24">
+        <div class="card">
+          <h4 class="mb-12" style="color:var(--success)">🦵 After Lower Body Training</h4>
+          <table class="workout-table">
+            <thead><tr><th>Stretch</th><th>Hold</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Pigeon Pose</strong> (or Figure-4 if hips tight)</td><td>60 sec/side</td></tr>
+              <tr><td><strong>Kneeling hip flexor stretch</strong></td><td>45 sec/side</td></tr>
+              <tr><td><strong>Supine hamstring stretch</strong> (strap/towel)</td><td>45 sec/side</td></tr>
+              <tr><td><strong>Calf stretch</strong> (wall, straight + bent knee)</td><td>30 sec each position/side</td></tr>
+              <tr><td><strong>Lateral quad stretch</strong> (side-lying)</td><td>30 sec/side</td></tr>
+              <tr><td><strong>McGill Big 3</strong> (always, after lower)</td><td>Standard protocol</td></tr>
+              <tr><td><strong>Dead hang</strong> (spinal decompression)</td><td>20–40 sec × 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h4 class="mb-12" style="color:var(--primary)">💪 After Upper Body Training</h4>
+          <table class="workout-table">
+            <thead><tr><th>Stretch</th><th>Hold</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Cross-body shoulder stretch</strong></td><td>30 sec/side</td></tr>
+              <tr><td><strong>Doorway pec stretch</strong> (3 heights: low, mid, high)</td><td>30 sec each</td></tr>
+              <tr><td><strong>Sleeper stretch</strong> (posterior capsule)</td><td>30 sec/side</td></tr>
+              <tr><td><strong>Upper trap + neck stretch</strong></td><td>30 sec/side</td></tr>
+              <tr><td><strong>Lat stretch</strong> (hanging or wall lean)</td><td>30 sec/side</td></tr>
+              <tr><td><strong>Thoracic foam roll</strong></td><td>5 positions × 3 breaths</td></tr>
+              <tr><td><strong>Dead hang</strong></td><td>30 sec × 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weekly Deep Work -->
+    <div class="tab-panel" id="panel-weekly">
+      <div class="card mb-24">
+        <div class="phase-banner" style="background: linear-gradient(135deg, var(--secondary), #4a1590);">
+          <div class="phase-number">📅</div>
+          <div>
+            <h2>Weekly Deep Mobility Session</h2>
+            <p style="color:rgba(255,255,255,0.8)">30–45 minutes. Saturday or Sunday. Targets all chronic restrictions. This is the work that makes everything else easier.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion" id="weeklyAccordion">
+        <div class="accordion-item open">
+          <button class="accordion-header"><span>🦋 Hip Complex (10 min)</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body">
+            <table class="workout-table">
+              <thead><tr><th>Exercise</th><th>Volume</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Pigeon Pose</strong></td><td>2 min/side</td><td>Stack hip over ankle. Let gravity work. Don't force.</td></tr>
+                <tr><td><strong>Happy Baby</strong></td><td>90 sec</td><td>Grab outside of feet. Rock gently side to side.</td></tr>
+                <tr><td><strong>Frog Stretch</strong></td><td>90 sec–2 min</td><td>Knees wide, hips back. Let inner groin open.</td></tr>
+                <tr><td><strong>90/90 with forward fold</strong></td><td>60 sec/side</td><td>Hinge at hip, chest toward shin.</td></tr>
+                <tr><td><strong>Cossack squat hold</strong></td><td>45 sec/side</td><td>Side lunge, foot flat. Dorsiflexion focus.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header"><span>🦴 Thoracic Spine (8 min)</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body">
+            <table class="workout-table">
+              <thead><tr><th>Exercise</th><th>Volume</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Foam Roller thoracic extension</strong></td><td>2 min (5 positions)</td><td>Hands behind head, support neck. Deep exhale at each spot.</td></tr>
+                <tr><td><strong>Quadruped thoracic rotation</strong></td><td>8/side × 2</td><td>Thread-the-needle pattern. Reach as far as possible.</td></tr>
+                <tr><td><strong>Open book stretch</strong></td><td>8/side</td><td>Side-lying. Rotate top arm to opposite side. Follow with eyes.</td></tr>
+                <tr><td><strong>Seated T-spine rotation</strong></td><td>10/side</td><td>Cross arms on chest. Rotate from thoracic, not lumbar.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header"><span>🦵 Hamstrings + Posterior Chain (8 min)</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body">
+            <table class="workout-table">
+              <thead><tr><th>Exercise</th><th>Volume</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr><td><strong>PNF Hamstring Stretch</strong></td><td>3 × 6-sec contract + 20-sec relax</td><td>Contract against resistance, relax into deeper stretch.</td></tr>
+                <tr><td><strong>Active Straight Leg Raise</strong></td><td>10/side</td><td>Lying flat. Keep other leg pressed to floor. Active pull.</td></tr>
+                <tr><td><strong>Standing RDL stretch</strong></td><td>30 sec × 2</td><td>Hinge at hip, feel hamstring pull. Not a toe touch.</td></tr>
+                <tr><td><strong>Seated forward fold with strap</strong></td><td>90 sec × 2</td><td>Loop around feet. Flex feet toward you. Breathe.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header"><span>🦶 Ankle + Foot (5 min)</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body">
+            <div class="alert alert-warning mb-12"><span>⚠️</span><div>Grade 3 left ankle tear (healed). Work slowly. No forced end-range until Week 8+. Stop if sharp pain — dull stretch is fine.</div></div>
+            <table class="workout-table">
+              <thead><tr><th>Exercise</th><th>Volume</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Ankle alphabet</strong></td><td>1 set each foot</td><td>Write every letter in all caps.</td></tr>
+                <tr><td><strong>Dorsiflexion wall drill</strong></td><td>10/side × 2</td><td>Knee over toe, heel flat. Measure weekly progress.</td></tr>
+                <tr><td><strong>Banded ankle distraction</strong></td><td>30 sec/position × 3</td><td>Band around ankle joint, pull to create space. Move in space.</td></tr>
+                <tr><td><strong>Plantar fascia roll</strong></td><td>60 sec/foot</td><td>Lacrosse ball or frozen water bottle.</td></tr>
+                <tr><td><strong>Toe spreading + isolation</strong></td><td>10 each foot</td><td>Spread toes wide, hold 3 sec. Lift big toe only × 10.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header"><span>💪 Shoulder + Neck Complex (5 min)</span><span class="accordion-icon">▼</span></button>
+          <div class="accordion-body">
+            <table class="workout-table">
+              <thead><tr><th>Exercise</th><th>Volume</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Shoulder CARs</strong></td><td>5/direction × 2</td><td>Extremely slow, full range, no pain. Own the range.</td></tr>
+                <tr><td><strong>Pec minor stretch</strong> (doorway, 3 heights)</td><td>45 sec each</td><td>Low: arm at hip. Mid: arm at 90°. High: arm overhead.</td></tr>
+                <tr><td><strong>Sleeper stretch</strong></td><td>45 sec × 2/side</td><td>Side lying, internal rotation stretch for posterior capsule.</td></tr>
+                <tr><td><strong>Neck side bend + ear to shoulder</strong></td><td>45 sec/side</td><td>Gently add hand for slight overpressure. Breathe.</td></tr>
+                <tr><td><strong>Dead hang</strong></td><td>3 × 20–45 sec</td><td>Full shoulder decompression. Relax completely.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobility Tests -->
+    <div class="tab-panel" id="panel-tests">
+      <div class="card mb-24">
+        <div class="phase-banner">
+          <div class="phase-number">📏</div>
+          <div>
+            <h2>Mobility Benchmark Tests</h2>
+            <p style="color:rgba(255,255,255,0.7)">Test monthly. Same conditions, same time of day. Progress = objective proof the work is working.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mb-24"><span>📅</span><div>Test every 4 weeks. Best time: Tuesday morning after warm-up, before any strenuous training.</div></div>
+
+      <table class="workout-table mb-32">
+        <thead>
+          <tr><th>Test</th><th>Why it Matters</th><th>Week 1 Target</th><th>Week 12 Target</th><th>Week 52 Target</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Deep Squat Hold</strong><br><span class="text-xs">Heels flat, depth below parallel, arms overhead</span></td>
+            <td>Hip, ankle & thoracic composite</td>
+            <td class="text-muted">10 sec with support</td>
+            <td class="text-primary">45 sec unassisted</td>
+            <td class="text-gold">90 sec unassisted</td>
+          </tr>
+          <tr>
+            <td><strong>Ankle Dorsiflexion</strong><br><span class="text-xs">Wall drill — knee to wall, heel flat (in cm/inches)</span></td>
+            <td>Ankle mobility for squat patterns</td>
+            <td class="text-muted">3–4 cm</td>
+            <td class="text-primary">6 cm+</td>
+            <td class="text-gold">8+ cm bilateral</td>
+          </tr>
+          <tr>
+            <td><strong>Seated Forward Fold</strong><br><span class="text-xs">Legs straight, reach toward feet. Measure fingertip to toe (+ = past toes)</span></td>
+            <td>Hamstring + posterior chain</td>
+            <td class="text-muted">-6" from toes</td>
+            <td class="text-primary">0" (reach toes)</td>
+            <td class="text-gold">+4" past toes</td>
+          </tr>
+          <tr>
+            <td><strong>Active Shoulder Flexion</strong><br><span class="text-xs">Standing, raise arm overhead. Measure angle from torso to arm (goal: 180°)</span></td>
+            <td>Overhead shoulder health</td>
+            <td class="text-muted">~160°</td>
+            <td class="text-primary">175°</td>
+            <td class="text-gold">180° bilateral</td>
+          </tr>
+          <tr>
+            <td><strong>Thomas Test</strong><br><span class="text-xs">Lie on edge of table, bring one knee to chest. Hanging leg angle = hip flexor tightness</span></td>
+            <td>Hip flexor / desk posture indicator</td>
+            <td class="text-muted">Leg lifts off floor</td>
+            <td class="text-primary">Leg at flat 0°</td>
+            <td class="text-gold">Slight negative (hip extension)</td>
+          </tr>
+          <tr>
+            <td><strong>Thoracic Rotation</strong><br><span class="text-xs">Seated on floor. Cross arms on chest. Rotate each way. Measure angle.</span></td>
+            <td>T-spine mobility — upper back stiffness</td>
+            <td class="text-muted">35–40°/side</td>
+            <td class="text-primary">50°/side</td>
+            <td class="text-gold">60°+ bilateral</td>
+          </tr>
+          <tr>
+            <td><strong>Single-Leg Balance</strong><br><span class="text-xs">Eyes closed, hands on hips. How long before you step?</span></td>
+            <td>Proprioception + ankle stability</td>
+            <td class="text-muted">10 sec L / 15 sec R</td>
+            <td class="text-primary">25 sec bilateral</td>
+            <td class="text-gold">45 sec + perturbation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card">
+        <div class="card-header"><h3>📋 My Test Results Log</h3><button onclick="window.print()" class="btn btn-secondary btn-sm no-print">🖨️ Print</button></div>
+        <table class="workout-table">
+          <thead><tr><th>Test</th><th>Baseline (Week 1)</th><th>Week 4</th><th>Week 8</th><th>Week 12</th></tr></thead>
+          <tbody>
+            <tr><td>Deep Squat Hold</td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td></tr>
+            <tr><td>Ankle Dorsiflexion (L/R)</td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td></tr>
+            <tr><td>Forward Fold</td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td></tr>
+            <tr><td>SL Balance Eyes Closed (L/R)</td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td><td><input type="text" style="background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; width:80px" placeholder="—"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    OP.initTabs('mobilityTabs', 'tab-panel');
+    OP.initAccordions('weeklyAccordion');
+  });
+</script>
+</body>
+</html>

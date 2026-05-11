@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operation Prime — Dashboard | Joseph</title>
+  <meta name="description" content="Operation Prime: 12-Month Elite Physical Transformation System" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/print.css" />
+  <style>
+    .hero-banner {
+      background: linear-gradient(135deg, #0d0d1f 0%, #0a1628 50%, #0d0d1f 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--gold));
+    }
+    .hero-banner::after {
+      content: 'PRIME';
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(0,212,255,0.04);
+      letter-spacing: -0.05em;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .hero-greeting { font-size: 0.8rem; font-weight: 700; color: var(--primary); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+    .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 12px; }
+    .hero-sub { color: var(--text-muted); font-size: 1rem; max-width: 500px; margin-bottom: 24px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .today-workout-card {
+      background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(123,47,247,0.08));
+      border: 1px solid rgba(0,212,255,0.3);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .today-workout-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .today-label { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .today-name { font-size: 1.2rem; font-weight: 800; color: var(--text); }
+    .today-desc { font-size: 0.83rem; color: var(--text-muted); margin-top: 4px; }
+    .today-arrow { color: var(--primary); font-size: 1.5rem; }
+    .quick-habits-preview { display: flex; flex-direction: column; gap: 2px; }
+    .mini-habit {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .mini-habit:last-child { border-bottom: none; }
+    .mini-check {
+      width: 20px; height: 20px;
+      border: 2px solid var(--border-bright);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; transition: var(--transition); flex-shrink: 0;
+    }
+    .mini-habit.done .mini-check { background: var(--success); border-color: var(--success); color: #000; }
+    .mini-habit.done span { text-decoration: line-through; color: var(--text-muted); }
+    .goal-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .goal-icon { font-size: 1.2rem; width: 32px; text-align: center; }
+    .goal-info { flex: 1; }
+    .goal-name { font-size: 0.85rem; font-weight: 600; }
+    .goal-val { font-size: 0.75rem; color: var(--text-muted); }
+    .phase-card-mini {
+      background: var(--bg-input);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border-left: 3px solid var(--border);
+      transition: var(--transition);
+    }
+    .phase-card-mini.current { border-left-color: var(--primary); background: var(--primary-glow); }
+    .phase-card-mini h5 { font-size: 0.85rem; margin-bottom: 2px; }
+    .phase-card-mini p { font-size: 0.75rem; }
+    .motivation-quote {
+      background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,215,0,0.02));
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .motivation-quote blockquote {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .motivation-quote cite { font-size: 0.78rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+<div class="overlay-bg" id="navOverlay"></div>
+
+<div class="app-layout">
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <div class="header-logo">
+      <div class="logo-icon">⚡</div>
+      <span>OPERATION <span>PRIME</span></span>
+    </div>
+    <div class="header-meta">
+      <span class="day-badge" data-day-number>Day 1</span>
+      <span class="text-muted text-sm no-print" data-today-date></span>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ── -->
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <a href="index.html" class="nav-link"><span class="nav-icon">⚡</span> Dashboard</a>
+      <a href="pages/calendar.html" class="nav-link"><span class="nav-icon">📅</span> Calendar</a>
+      <a href="pages/habits.html" class="nav-link"><span class="nav-icon">✅</span> Habit Tracker</a>
+      <a href="pages/tracker.html" class="nav-link"><span class="nav-icon">📊</span> Progress</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Training</div>
+      <a href="pages/phase1.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 1 (Days 1–90)</a>
+      <a href="pages/phase2.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 2 (Mo. 4–6)</a>
+      <a href="pages/phase3.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 3 (Mo. 7–9)</a>
+      <a href="pages/phase4.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 4 (Mo. 10–12)</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Protocols</div>
+      <a href="pages/rehab.html" class="nav-link"><span class="nav-icon">🦴</span> Rehab Library</a>
+      <a href="pages/mobility.html" class="nav-link"><span class="nav-icon">🧘</span> Mobility Library</a>
+      <a href="pages/daily.html" class="nav-link"><span class="nav-icon">🕐</span> Daily Schedule</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Lifestyle</div>
+      <a href="pages/nutrition.html" class="nav-link"><span class="nav-icon">🥩</span> Nutrition System</a>
+      <a href="pages/equipment.html" class="nav-link"><span class="nav-icon">🛒</span> Equipment Guide</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Reviews</div>
+      <a href="pages/weekly.html" class="nav-link"><span class="nav-icon">📝</span> Weekly Review</a>
+    </div>
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <main class="main-content">
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-greeting">🎯 Operation Prime — Active Protocol</div>
+      <h1 class="hero-title">Welcome back,<br><span class="gradient-text">Joseph.</span></h1>
+      <p class="hero-sub">Your elite performance system is running. Every rep, every meal, every habit compounds into the athlete you're becoming.</p>
+      <div class="hero-actions">
+        <a href="pages/phase1.html" class="btn btn-primary btn-lg">📋 Today's Training</a>
+        <a href="pages/habits.html" class="btn btn-secondary btn-lg">✅ Log Habits</a>
+        <a href="pages/tracker.html" class="btn btn-secondary btn-lg">📊 Track Progress</a>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-grid mb-32">
+      <div class="stat-card card-glow">
+        <div class="label">Program Day</div>
+        <div class="stat-value primary" data-day-number>1</div>
+        <div class="text-muted text-sm">of 365</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Current Phase</div>
+        <div class="stat-value" style="font-size:1.3rem" data-phase-name>Foundation</div>
+        <div class="text-muted text-sm" data-week-number>Week 1</div>
+      </div>
+      <div class="stat-card card-gold">
+        <div class="label">Habit Streak 🔥</div>
+        <div class="stat-value gold"><span data-streak>0</span> days</div>
+        <div class="text-muted text-sm">Keep going!</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Start Weight</div>
+        <div class="stat-value">190 <span style="font-size:1rem;color:var(--text-muted)">lbs</span></div>
+        <div class="text-muted text-sm">Goal: 172 lbs</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Today's Score</div>
+        <div class="stat-value success"><span data-habit-pct>0</span>%</div>
+        <div class="text-muted text-sm" data-habit-score>0/0 pts</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">To Goal</div>
+        <div class="stat-value warning">~18 <span style="font-size:1rem;color:var(--text-muted)">lbs</span></div>
+        <div class="text-muted text-sm">Est. 20–24 weeks</div>
+      </div>
+    </div>
+
+    <div class="grid-2 mb-32">
+
+      <!-- Today's Plan -->
+      <div>
+        <div class="page-header" style="margin-bottom:16px">
+          <div class="label">Today's Plan</div>
+        </div>
+
+        <a href="pages/phase1.html" class="today-workout-card" style="text-decoration:none">
+          <div>
+            <div class="today-label">Today's Workout</div>
+            <div class="today-name" data-today-workout>Loading…</div>
+            <div class="today-desc" data-today-workout-desc></div>
+          </div>
+          <div class="today-arrow">→</div>
+        </a>
+
+        <div class="card mb-16">
+          <div class="card-header">
+            <h3>⚡ Quick Habit Check</h3>
+            <span class="badge badge-primary" data-habit-pct>0%</span>
+          </div>
+          <div id="habitContainer"></div>
+          <div class="mt-16">
+            <div class="progress-label">
+              <span class="text-sm text-muted">Daily Score</span>
+              <span class="text-sm font-bold" data-habit-score>0/0 pts</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" data-habit-bar style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="motivation-quote">
+          <blockquote id="quoteText">"Discipline is choosing between what you want now and what you want most."</blockquote>
+          <cite id="quoteAuthor">— Abraham Lincoln</cite>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div>
+        <!-- Phase Roadmap -->
+        <div class="card mb-20">
+          <div class="card-header"><h3>🗺️ 12-Month Roadmap</h3></div>
+          <div class="phase-card-mini current">
+            <h5>🔱 Phase 1 — Foundation &amp; Rehab <span class="badge badge-primary" style="font-size:.65rem">ACTIVE</span></h5>
+            <p>Days 1–90 | Posture, mobility, rehab, fat loss base</p>
+          </div>
+          <div class="phase-card-mini">
+            <h5>🔱 Phase 2 — Athletic Development</h5>
+            <p>Months 4–6 | Strength, conditioning, body comp shift</p>
+          </div>
+          <div class="phase-card-mini">
+            <h5>🔱 Phase 3 — Peak Performance</h5>
+            <p>Months 7–9 | Athletic peak, aesthetics, lean muscle</p>
+          </div>
+          <div class="phase-card-mini">
+            <h5>🔱 Phase 4 — Elite Integration</h5>
+            <p>Months 10–12 | Lifestyle locked, maintain &amp; refine</p>
+          </div>
+        </div>
+
+        <!-- Goals -->
+        <div class="card mb-20">
+          <div class="card-header"><h3>🎯 Primary Goals</h3></div>
+          <div class="goal-row">
+            <div class="goal-icon">⚖️</div>
+            <div class="goal-info">
+              <div class="goal-name">Weight: 190 → 172 lbs</div>
+              <div class="progress-bar mt-8" style="height:4px"><div class="progress-fill" style="width:5%"></div></div>
+            </div>
+          </div>
+          <div class="goal-row">
+            <div class="goal-icon">📐</div>
+            <div class="goal-info">
+              <div class="goal-name">Waist: &lt;33 inches</div>
+              <div class="progress-bar mt-8" style="height:4px"><div class="progress-fill" style="width:5%"></div></div>
+            </div>
+          </div>
+          <div class="goal-row">
+            <div class="goal-icon">🦵</div>
+            <div class="goal-info">
+              <div class="goal-name">Pain-free lower back</div>
+              <div class="progress-bar mt-8" style="height:4px"><div class="progress-fill success" style="width:10%"></div></div>
+            </div>
+          </div>
+          <div class="goal-row">
+            <div class="goal-icon">💪</div>
+            <div class="goal-info">
+              <div class="goal-name">Bulletproof shoulders</div>
+              <div class="progress-bar mt-8" style="height:4px"><div class="progress-fill" style="width:5%"></div></div>
+            </div>
+          </div>
+          <div class="goal-row">
+            <div class="goal-icon">🧘</div>
+            <div class="goal-info">
+              <div class="goal-name">Deep squat mobility</div>
+              <div class="progress-bar mt-8" style="height:4px"><div class="progress-fill" style="width:5%"></div></div>
+            </div>
+          </div>
+          <div class="goal-row">
+            <div class="goal-icon">🏃</div>
+            <div class="goal-info">
+              <div class="goal-name">Ankle resilience restored</div>
+              <div class="progress-bar mt-8" style="height:4px"><div class="progress-fill" style="width:10%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- This Week's Focus -->
+        <div class="card">
+          <div class="card-header"><h3>📅 This Week's Focus</h3></div>
+          <div class="alert alert-info">
+            <span>🎯</span>
+            <div>
+              <p><strong>Week 1 Priority:</strong> Establish habits, activate glutes, begin McGill Big 3, and fix desk posture. No ego lifting. Build the foundation.</p>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">McGill Big 3</span>
+            <span class="tag">Glute Activation</span>
+            <span class="tag">Chin Tucks</span>
+            <span class="tag">Band Pull Aparts</span>
+            <span class="tag">Zone 2 Walk</span>
+            <span class="tag">IF 16:8</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Weekly Calendar Preview -->
+    <div class="card mb-32">
+      <div class="card-header">
+        <h3>📅 This Week's Schedule</h3>
+        <a href="pages/calendar.html" class="btn btn-secondary btn-sm">Full Calendar</a>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:8px; text-align:center;">
+        <div>
+          <div class="label" style="margin-bottom:8px">Mon</div>
+          <div class="card" style="padding:12px 8px; border-color:rgba(0,212,255,0.4); background:var(--primary-glow);">
+            <div style="font-size:1.5rem">🦵</div>
+            <div style="font-size:0.72rem; color:var(--primary); font-weight:700; margin-top:4px">Lower</div>
+          </div>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">Tue</div>
+          <div class="card" style="padding:12px 8px">
+            <div style="font-size:1.5rem">💪</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:4px">Upper</div>
+          </div>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">Wed</div>
+          <div class="card" style="padding:12px 8px">
+            <div style="font-size:1.5rem">❤️</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:4px">Zone 2</div>
+          </div>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">Thu</div>
+          <div class="card" style="padding:12px 8px">
+            <div style="font-size:1.5rem">🦵</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:4px">Lower</div>
+          </div>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">Fri</div>
+          <div class="card" style="padding:12px 8px">
+            <div style="font-size:1.5rem">💪</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:4px">Upper</div>
+          </div>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">Sat</div>
+          <div class="card" style="padding:12px 8px">
+            <div style="font-size:1.5rem">🧘</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:4px">Active</div>
+          </div>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">Sun</div>
+          <div class="card" style="padding:12px 8px">
+            <div style="font-size:1.5rem">😴</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:4px">Rest</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="grid-4 mb-32">
+      <a href="pages/rehab.html" class="card card-glow" style="text-decoration:none; text-align:center; padding:24px 16px">
+        <div style="font-size:2rem; margin-bottom:8px">🦴</div>
+        <h4 style="font-size:0.9rem">Rehab Protocols</h4>
+        <p style="font-size:0.78rem; margin-top:4px">Shoulder, back, knee, ankle</p>
+      </a>
+      <a href="pages/mobility.html" class="card card-glow" style="text-decoration:none; text-align:center; padding:24px 16px">
+        <div style="font-size:2rem; margin-bottom:8px">🧘</div>
+        <h4 style="font-size:0.9rem">Mobility Library</h4>
+        <p style="font-size:0.78rem; margin-top:4px">Daily flexibility routines</p>
+      </a>
+      <a href="pages/nutrition.html" class="card card-glow" style="text-decoration:none; text-align:center; padding:24px 16px">
+        <div style="font-size:2rem; margin-bottom:8px">🥩</div>
+        <h4 style="font-size:0.9rem">Nutrition System</h4>
+        <p style="font-size:0.78rem; margin-top:4px">GF/DF meal plans + macros</p>
+      </a>
+      <a href="pages/equipment.html" class="card card-glow" style="text-decoration:none; text-align:center; padding:24px 16px">
+        <div style="font-size:2rem; margin-bottom:8px">🛒</div>
+        <h4 style="font-size:0.9rem">Equipment Guide</h4>
+        <p style="font-size:0.78rem; margin-top:4px">Costco, Amazon, setup</p>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="divider"></div>
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 0; flex-wrap:wrap; gap:12px">
+      <span class="text-muted text-sm">⚡ Operation Prime · Start: May 11, 2026 · Joseph, Age 33</span>
+      <div style="display:flex; gap:12px">
+        <button onclick="window.print()" class="btn btn-secondary btn-sm no-print">🖨️ Print</button>
+        <span class="text-muted text-xs" style="align-self:center">Built for Elite Performance</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script>
+  // Motivational quotes rotation
+  const quotes = [
+    { q: "Discipline is choosing between what you want now and what you want most.", a: "Abraham Lincoln" },
+    { q: "The body achieves what the mind believes.", a: "Napoleon Hill" },
+    { q: "You don't have to be extreme, just consistent.", a: "Anonymous" },
+    { q: "Take care of your body. It's the only place you have to live.", a: "Jim Rohn" },
+    { q: "Success is the sum of small efforts repeated day in and day out.", a: "Robert Collier" },
+    { q: "The pain you feel today will be the strength you feel tomorrow.", a: "Arnold Schwarzenegger" },
+    { q: "Your only limit is you.", a: "Anonymous" },
+    { q: "Do something today that your future self will thank you for.", a: "Sean Patrick Flanery" },
+    { q: "It never gets easier, you just get better.", a: "Anonymous" },
+    { q: "The secret of getting ahead is getting started.", a: "Mark Twain" },
+  ];
+  const q = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById('quoteText').textContent = `"${q.q}"`;
+  document.getElementById('quoteAuthor').textContent = `— ${q.a}`;
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Tracker | Operation Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+<div class="overlay-bg" id="navOverlay"></div>
+<div class="app-layout">
+  <header class="site-header">
+    <div class="header-logo"><div class="logo-icon">⚡</div><span>OPERATION <span>PRIME</span></span></div>
+    <div class="header-meta"><span class="day-badge" data-day-number>Day 1</span><button class="menu-toggle" id="menuToggle">☰</button></div>
+  </header>
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <a href="../index.html" class="nav-link"><span class="nav-icon">⚡</span> Dashboard</a>
+      <a href="calendar.html" class="nav-link"><span class="nav-icon">📅</span> Calendar</a>
+      <a href="habits.html" class="nav-link active"><span class="nav-icon">✅</span> Habit Tracker</a>
+      <a href="tracker.html" class="nav-link"><span class="nav-icon">📊</span> Progress</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Training</div>
+      <a href="phase1.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 1</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Protocols</div>
+      <a href="rehab.html" class="nav-link"><span class="nav-icon">🦴</span> Rehab Library</a>
+      <a href="mobility.html" class="nav-link"><span class="nav-icon">🧘</span> Mobility Library</a>
+      <a href="daily.html" class="nav-link"><span class="nav-icon">🕐</span> Daily Schedule</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Lifestyle</div>
+      <a href="nutrition.html" class="nav-link"><span class="nav-icon">🥩</span> Nutrition System</a>
+      <a href="equipment.html" class="nav-link"><span class="nav-icon">🛒</span> Equipment Guide</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="label">✅ Daily Discipline Engine</div>
+      <h1>Habit <span class="gradient-text">Tracker</span></h1>
+      <p>20 habits. 5 categories. Up to 185 points per day. Build the machine — and it builds you.</p>
+    </div>
+
+    <!-- Date Nav + Score -->
+    <div class="card mb-32">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px">
+        <div style="display:flex; align-items:center; gap:12px">
+          <button class="btn btn-secondary btn-sm" onclick="habitNav(-1)">← Prev</button>
+          <div>
+            <div class="label" id="habitDateLabel">Today</div>
+            <h3 id="habitDateFull" style="margin:0; color:var(--primary)">Loading...</h3>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="habitNav(1)">Next →</button>
+        </div>
+        <div style="text-align:center">
+          <div class="stat-value primary" id="todayScore">0</div>
+          <div class="text-sm text-muted">/ 185 pts</div>
+        </div>
+        <div>
+          <div class="label">Completion</div>
+          <div class="stat-value gold" id="completionPct" style="font-size:1.6rem">0%</div>
+        </div>
+        <div style="text-align:right">
+          <div class="label">🔥 Streak</div>
+          <div class="stat-value" id="streakCount" style="font-size:1.6rem">0 days</div>
+        </div>
+      </div>
+      <div class="progress-bar mt-16" style="height:8px">
+        <div class="progress-fill" id="scoreProgress" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- 7-Day Grid -->
+    <div class="card mb-32">
+      <h3 class="mb-16">📅 This Week</h3>
+      <div id="weekGrid" style="display:grid; grid-template-columns:repeat(7, 1fr); gap:8px; text-align:center"></div>
+    </div>
+
+    <!-- Habits by Category -->
+    <div id="habitSections"></div>
+
+  </main>
+</div>
+
+<script src="../assets/js/app.js"></script>
+<script>
+let habitOffset = 0;
+
+function habitNav(dir) {
+  habitOffset += dir;
+  if (habitOffset > 0) habitOffset = 0;
+  renderHabitPage();
+}
+
+function getOffsetDate(offset) {
+  const d = new Date();
+  d.setDate(d.getDate() + offset);
+  return d;
+}
+
+function formatDateKey(d) {
+  return d.toISOString().split('T')[0];
+}
+
+function renderHabitPage() {
+  const d = getOffsetDate(habitOffset);
+  const key = formatDateKey(d);
+  const isToday = habitOffset === 0;
+
+  document.getElementById('habitDateFull').textContent = d.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric'});
+  document.getElementById('habitDateLabel').textContent = isToday ? '📅 Today' : (habitOffset === -1 ? '📅 Yesterday' : `📅 ${Math.abs(habitOffset)} days ago`);
+
+  const done = OP.store.get('habits_' + key) || {};
+  let totalScore = 0;
+  let maxScore = 0;
+  const categories = {};
+
+  OP.HABITS.forEach(h => {
+    if (!categories[h.cat]) categories[h.cat] = [];
+    categories[h.cat].push(h);
+    maxScore += h.pts;
+    if (done[h.id]) totalScore += h.pts;
+  });
+
+  document.getElementById('todayScore').textContent = totalScore;
+  const pct = Math.round((totalScore / maxScore) * 100);
+  document.getElementById('completionPct').textContent = pct + '%';
+  document.getElementById('scoreProgress').style.width = pct + '%';
+  document.getElementById('streakCount').textContent = OP.getStreak() + ' days';
+
+  // Week grid
+  const wg = document.getElementById('weekGrid');
+  wg.innerHTML = '';
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  for (let i = -6; i <= 0; i++) {
+    const dd = getOffsetDate(i);
+    const dk = formatDateKey(dd);
+    const ddone = OP.store.get('habits_' + dk) || {};
+    let ds = 0;
+    OP.HABITS.forEach(h => { if (ddone[h.id]) ds += h.pts; });
+    const dpct = Math.round((ds / maxScore) * 100);
+    const isActive = i === habitOffset;
+    const color = dpct >= 80 ? 'var(--success)' : dpct >= 50 ? 'var(--gold)' : dpct > 0 ? 'var(--warning)' : 'var(--border)';
+    wg.innerHTML += `<div style="padding:8px 4px; border-radius:8px; border:2px solid ${isActive ? 'var(--primary)' : color}; background:${dpct > 0 ? color + '18' : 'var(--surface)'}; cursor:pointer" onclick="habitOffset=${i};renderHabitPage()">
+      <div style="font-size:0.65rem; color:var(--text-muted)">${days[dd.getDay()]}</div>
+      <div style="font-weight:800; font-size:1rem; color:${color}">${dpct}%</div>
+      <div style="font-size:0.6rem; color:var(--text-muted)">${dd.getDate()}</div>
+    </div>`;
+  }
+
+  // Habit sections
+  const catIcons = {'Morning': '🌅', 'Nutrition': '🥩', 'Training': '🏋️', 'Posture': '🧘', 'Recovery': '😴'};
+  const catColors = {'Morning': 'var(--gold)', 'Nutrition': 'var(--success)', 'Training': 'var(--primary)', 'Posture': 'var(--secondary)', 'Recovery': 'var(--warning)'};
+  const sections = document.getElementById('habitSections');
+  sections.innerHTML = '';
+
+  Object.entries(categories).forEach(([cat, habits]) => {
+    let catScore = 0;
+    let catMax = habits.reduce((a, h) => a + h.pts, 0);
+    habits.forEach(h => { if (done[h.id]) catScore += h.pts; });
+    const catPct = Math.round((catScore / catMax) * 100);
+    const color = catColors[cat] || 'var(--primary)';
+
+    let itemsHtml = habits.map(h => {
+      const checked = done[h.id] ? 'checked' : '';
+      return `<div class="habit-item ${done[h.id] ? 'habit-done' : ''}">
+        <label style="display:flex; align-items:flex-start; gap:12px; cursor:pointer; width:100%">
+          <input type="checkbox" class="habit-cb" data-id="${h.id}" data-pts="${h.pts}" ${checked} ${!isToday ? 'disabled' : ''} onchange="toggleHabitCb(this,'${key}')">
+          <div style="flex:1">
+            <div style="font-weight:600; ${done[h.id] ? 'text-decoration:line-through; color:var(--text-muted)' : ''}">${h.name}</div>
+            ${h.desc ? `<div class="text-sm text-muted">${h.desc}</div>` : ''}
+          </div>
+          <div style="font-size:0.75rem; font-weight:700; color:${color}; white-space:nowrap">+${h.pts}pts</div>
+        </label>
+      </div>`;
+    }).join('');
+
+    sections.innerHTML += `<div class="card mb-16">
+      <div class="card-header">
+        <h3>${catIcons[cat] || '📌'} ${cat}</h3>
+        <div style="display:flex; align-items:center; gap:12px">
+          <span class="text-sm text-muted">${catScore}/${catMax} pts</span>
+          <span style="font-weight:800; color:${color}">${catPct}%</span>
+        </div>
+      </div>
+      <div class="progress-bar mb-16" style="height:4px"><div class="progress-fill" style="width:${catPct}%; background:${color}"></div></div>
+      <div class="habits-list">${itemsHtml}</div>
+    </div>`;
+  });
+}
+
+function toggleHabitCb(cb, dateKey) {
+  const id = cb.dataset.id;
+  const done = OP.store.get('habits_' + dateKey) || {};
+  if (cb.checked) { done[id] = true; } else { delete done[id]; }
+  OP.store.set('habits_' + dateKey, done);
+  renderHabitPage();
+}
+
+document.addEventListener('DOMContentLoaded', renderHabitPage);
+</script>
+</body>
+</html>

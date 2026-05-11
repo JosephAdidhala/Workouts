@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12-Month Calendar | Operation Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+<div class="overlay-bg" id="navOverlay"></div>
+<div class="app-layout">
+  <header class="site-header">
+    <div class="header-logo"><div class="logo-icon">⚡</div><span>OPERATION <span>PRIME</span></span></div>
+    <div class="header-meta"><span class="day-badge" data-day-number>Day 1</span><button class="menu-toggle" id="menuToggle">☰</button></div>
+  </header>
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <a href="../index.html" class="nav-link"><span class="nav-icon">⚡</span> Dashboard</a>
+      <a href="calendar.html" class="nav-link active"><span class="nav-icon">📅</span> Calendar</a>
+      <a href="habits.html" class="nav-link"><span class="nav-icon">✅</span> Habit Tracker</a>
+      <a href="tracker.html" class="nav-link"><span class="nav-icon">📊</span> Progress</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Training</div>
+      <a href="phase1.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 1</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Protocols</div>
+      <a href="rehab.html" class="nav-link"><span class="nav-icon">🦴</span> Rehab Library</a>
+      <a href="mobility.html" class="nav-link"><span class="nav-icon">🧘</span> Mobility Library</a>
+      <a href="daily.html" class="nav-link"><span class="nav-icon">🕐</span> Daily Schedule</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Lifestyle</div>
+      <a href="nutrition.html" class="nav-link"><span class="nav-icon">🥩</span> Nutrition System</a>
+      <a href="equipment.html" class="nav-link"><span class="nav-icon">🛒</span> Equipment Guide</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="label">📅 12-Month Roadmap</div>
+      <h1>Program <span class="gradient-text">Calendar</span></h1>
+      <p>See the full year at a glance. Every training day, milestone, phase, and assessment checkpoint.</p>
+    </div>
+
+    <!-- Month nav -->
+    <div class="card mb-24">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px">
+        <button class="btn btn-secondary" onclick="OP.calNav(-1)">← Prev Month</button>
+        <div style="text-align:center">
+          <h2 id="calMonthLabel" style="margin:0; color:var(--primary)">Loading...</h2>
+          <div class="text-muted text-sm" id="calPhaseLabel">Phase info loading...</div>
+        </div>
+        <button class="btn btn-secondary" onclick="OP.calNav(1)">Next Month →</button>
+      </div>
+    </div>
+
+    <!-- Calendar Legend -->
+    <div class="card mb-24" style="padding:12px 20px">
+      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center">
+        <span class="text-sm text-muted" style="font-weight:600">Legend:</span>
+        <span style="display:flex; align-items:center; gap:6px; font-size:0.8rem"><span style="width:12px; height:12px; border-radius:3px; background:var(--primary); display:inline-block"></span> Lower Body</span>
+        <span style="display:flex; align-items:center; gap:6px; font-size:0.8rem"><span style="width:12px; height:12px; border-radius:3px; background:var(--secondary); display:inline-block"></span> Upper Body</span>
+        <span style="display:flex; align-items:center; gap:6px; font-size:0.8rem"><span style="width:12px; height:12px; border-radius:3px; background:var(--success); display:inline-block"></span> Zone 2 Cardio</span>
+        <span style="display:flex; align-items:center; gap:6px; font-size:0.8rem"><span style="width:12px; height:12px; border-radius:3px; background:var(--gold); display:inline-block"></span> Active Recovery</span>
+        <span style="display:flex; align-items:center; gap:6px; font-size:0.8rem"><span style="width:12px; height:12px; border-radius:3px; background:var(--border); display:inline-block"></span> Rest</span>
+        <span style="display:flex; align-items:center; gap:6px; font-size:0.8rem"><span style="width:12px; height:12px; border-radius:3px; background:var(--warning); display:inline-block"></span> Milestone</span>
+      </div>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div class="card mb-32">
+      <div id="calGrid"></div>
+    </div>
+
+    <!-- Phase Timeline -->
+    <div class="card mb-32">
+      <div class="card-header"><h3>🗓️ 12-Month Phase Roadmap</h3></div>
+      <div class="timeline">
+        <div class="timeline-item primary">
+          <div class="timeline-time">Months 1–3</div>
+          <div class="timeline-content">
+            <h4>🔱 Phase 1: Foundation & Rehab</h4>
+            <p>Days 1–90. Build the base. Fix posture and pain points. Establish habits. Start fat loss.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px">
+              <span class="badge badge-primary">May 11 – Aug 8, 2026</span>
+              <span class="badge badge-muted">~18 lbs to lose</span>
+              <span class="badge badge-muted">4 days training/week</span>
+            </div>
+            <ul style="font-size:0.82rem; color:var(--text-muted); padding-left:16px; line-height:2; margin-top:8px">
+              <li>Week 4: First progress photo + measurements</li>
+              <li>Week 8: Ankle progresses to Phase 2 (eyes-closed balance, BOSU)</li>
+              <li>Week 12: Phase 1 strength assessment. Prepare for Phase 2.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item gold">
+          <div class="timeline-time">Months 4–6</div>
+          <div class="timeline-content">
+            <h4>⚡ Phase 2: Athletic Development</h4>
+            <p>Days 91–180. Higher intensity. More volume. Compound barbell focus. Body recomposition accelerates.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px">
+              <span class="badge badge-gold">Aug 9 – Nov 6, 2026</span>
+              <span class="badge badge-muted">Goal: 175 lbs</span>
+              <span class="badge badge-muted">5 days training/week</span>
+            </div>
+            <ul style="font-size:0.82rem; color:var(--text-muted); padding-left:16px; line-height:2; margin-top:8px">
+              <li>Month 4: Conventional deadlift + back squat introduced heavy</li>
+              <li>Month 5: Conditioning ramps — metabolic conditioning circuits</li>
+              <li>Month 6: Aesthetics check — jawline, visible abs emerging</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item success">
+          <div class="timeline-time">Months 7–9</div>
+          <div class="timeline-content">
+            <h4>🏆 Phase 3: Peak Performance</h4>
+            <p>Days 181–270. Strength + conditioning peak. Advanced programming. Visible physique results prominent.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px">
+              <span class="badge badge-success">Nov 7, 2026 – Feb 5, 2027</span>
+              <span class="badge badge-muted">Goal: 172 lbs</span>
+              <span class="badge badge-muted">5–6 days training/week</span>
+            </div>
+            <ul style="font-size:0.82rem; color:var(--text-muted); padding-left:16px; line-height:2; margin-top:8px">
+              <li>Month 7: Hitting strength standards — deadlift 1.75× BW+</li>
+              <li>Month 8: Full athletic movement (jumping, change of direction)</li>
+              <li>Month 9: 9-month progress photos — dramatic transformation visible</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item gold">
+          <div class="timeline-time">Months 10–12</div>
+          <div class="timeline-content">
+            <h4>💎 Phase 4: Elite Integration</h4>
+            <p>Days 271–365. Maintenance. Mastery. Lifestyle programming. This is who you are now — not what you're doing.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px">
+              <span class="badge badge-warning">Feb 6 – May 11, 2027</span>
+              <span class="badge badge-muted">Goal: Maintain 170–175</span>
+              <span class="badge badge-muted">4–5 days/week — sustainable</span>
+            </div>
+            <ul style="font-size:0.82rem; color:var(--text-muted); padding-left:16px; line-height:2; margin-top:8px">
+              <li>Month 10: Design your own 12-week block</li>
+              <li>Month 11: Optional: add sport, martial arts, or recreational training</li>
+              <li>Month 12: 1-year assessment. Plan Year 2.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Milestones -->
+    <div class="card mb-32">
+      <div class="card-header"><h3>🏆 Key Milestone Dates</h3></div>
+      <table class="workout-table">
+        <thead><tr><th>Date</th><th>Day #</th><th>Milestone</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><strong>May 11, 2026</strong></td><td>1</td><td>🚀 Program Launch</td><td>Take baseline photos + measurements</td></tr>
+          <tr><td><strong>Jun 7, 2026</strong></td><td>28</td><td>📊 4-Week Check</td><td>Weight, waist, energy level review</td></tr>
+          <tr><td><strong>Jul 5, 2026</strong></td><td>56</td><td>💪 Ankle Phase 2</td><td>Progress to eyes-closed balance, BOSU</td></tr>
+          <tr><td><strong>Aug 2, 2026</strong></td><td>84</td><td>📏 Phase 1 Assessment</td><td>Strength standards, mobility tests, photos</td></tr>
+          <tr><td><strong>Aug 9, 2026</strong></td><td>91</td><td>⚡ Phase 2 Begins</td><td>Increase volume, barbell focus</td></tr>
+          <tr><td><strong>Sep 6, 2026</strong></td><td>119</td><td>🏃 Full Conditioning</td><td>Lateral movement cleared for ankle</td></tr>
+          <tr><td><strong>Nov 6, 2026</strong></td><td>180</td><td>🏆 6-Month Assessment</td><td>Full battery tests, photos, measurements</td></tr>
+          <tr><td><strong>Feb 5, 2027</strong></td><td>270</td><td>💎 9-Month Mark</td><td>Peak performance assessment</td></tr>
+          <tr><td><strong>May 11, 2027</strong></td><td>365</td><td>🥇 1-Year Completion</td><td>Full transformation complete. Plan Year 2.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    OP.renderCalendar();
+  });
+</script>
+</body>
+</html>

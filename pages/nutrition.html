@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nutrition System | Operation Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/print.css" />
+  <style>
+    .macro-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+    .macro-block { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; text-align:center; }
+    .macro-block .val { font-size:2.2rem; font-weight:900; letter-spacing:-0.04em; line-height:1; margin:8px 0 4px; }
+    .macro-block .unit { font-size:0.75rem; color:var(--text-muted); font-weight:600; }
+    .macro-p { color:#00d4ff; }
+    .macro-c { color:#ffd700; }
+    .macro-f { color:#ff6b35; }
+    .macro-cal { color:#00e87a; }
+    .food-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); font-size:0.875rem; }
+    .food-item:last-child { border-bottom:none; }
+    .food-icon { font-size:1.3rem; width:28px; text-align:center; flex-shrink:0; }
+    .food-info { flex:1; }
+    .food-name { font-weight:600; }
+    .food-macros { font-size:0.75rem; color:var(--text-muted); margin-top:2px; }
+    .food-protein { color:var(--primary); font-weight:700; font-size:0.78rem; }
+    .window-bar { height:8px; border-radius:99px; background:var(--border); position:relative; overflow:visible; margin:16px 0; }
+    .window-fast { background:var(--bg-input); height:8px; border-radius:99px 0 0 99px; display:inline-block; }
+    .window-eat { background:linear-gradient(90deg,var(--success),var(--primary)); height:8px; border-radius:0 99px 99px 0; display:inline-block; }
+    .supplement-item { display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+    .supplement-item:last-child { border-bottom:none; }
+    .supp-icon { font-size:1.4rem; }
+    .supp-info h5 { font-size:0.9rem; margin-bottom:2px; }
+    .supp-info p { font-size:0.78rem; }
+    .supp-timing { margin-left:auto; font-size:0.75rem; color:var(--primary); font-weight:700; white-space:nowrap; }
+  </style>
+</head>
+<body>
+<div class="overlay-bg" id="navOverlay"></div>
+<div class="app-layout">
+
+  <header class="site-header">
+    <div class="header-logo"><div class="logo-icon">⚡</div><span>OPERATION <span>PRIME</span></span></div>
+    <div class="header-meta">
+      <span class="day-badge" data-day-number>Day 1</span>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <a href="../index.html" class="nav-link"><span class="nav-icon">⚡</span> Dashboard</a>
+      <a href="calendar.html" class="nav-link"><span class="nav-icon">📅</span> Calendar</a>
+      <a href="habits.html" class="nav-link"><span class="nav-icon">✅</span> Habit Tracker</a>
+      <a href="tracker.html" class="nav-link"><span class="nav-icon">📊</span> Progress</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Training</div>
+      <a href="phase1.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 1 (Days 1–90)</a>
+      <a href="phase2.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 2 (Mo. 4–6)</a>
+      <a href="phase3.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 3 (Mo. 7–9)</a>
+      <a href="phase4.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 4 (Mo. 10–12)</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Protocols</div>
+      <a href="rehab.html" class="nav-link"><span class="nav-icon">🦴</span> Rehab Library</a>
+      <a href="mobility.html" class="nav-link"><span class="nav-icon">🧘</span> Mobility Library</a>
+      <a href="daily.html" class="nav-link"><span class="nav-icon">🕐</span> Daily Schedule</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Lifestyle</div>
+      <a href="nutrition.html" class="nav-link active"><span class="nav-icon">🥩</span> Nutrition System</a>
+      <a href="equipment.html" class="nav-link"><span class="nav-icon">🛒</span> Equipment Guide</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+
+    <div class="page-header">
+      <div class="label">🥩 Operation Prime — Nutrition System</div>
+      <h1>Anti-Inflammatory <span class="gradient-text">Fuel Protocol</span></h1>
+      <p>100% Gluten-Free · Dairy-Free · High-Protein · Intermittent Fasting · Anti-Inflammatory</p>
+    </div>
+
+    <!-- Phase Selector -->
+    <div class="tabs" id="nutritionTabs">
+      <button class="tab-btn active" data-tab="cutting">Cutting Phase<br><span style="font-size:.65rem;opacity:.7">Months 1–4</span></button>
+      <button class="tab-btn" data-tab="maintenance">Maintenance<br><span style="font-size:.65rem;opacity:.7">Months 5–8</span></button>
+      <button class="tab-btn" data-tab="leanBulk">Lean Muscle<br><span style="font-size:.65rem;opacity:.7">Months 9–12</span></button>
+      <button class="tab-btn" data-tab="shopping">Shopping Lists</button>
+      <button class="tab-btn" data-tab="supplements">Supplements</button>
+    </div>
+
+    <!-- ══════════ CUTTING PHASE ══════════ -->
+    <div class="tab-panel active" id="cutting">
+      <div class="alert alert-info mb-24">
+        <span>🎯</span>
+        <div><strong>Cutting Phase Target:</strong> 500-calorie daily deficit. Lose 0.75–1 lb fat/week. Protect muscle mass with high protein. Gluten-free, dairy-free whole foods only. Eating window: 12:00 PM – 8:00 PM.</div>
+      </div>
+
+      <!-- Macros -->
+      <div class="macro-grid">
+        <div class="macro-block">
+          <div class="label">Calories</div>
+          <div class="val macro-cal">2,050</div>
+          <div class="unit">kcal / day</div>
+          <div class="text-muted text-xs mt-8">TDEE ~2,550 → −500 deficit</div>
+        </div>
+        <div class="macro-block">
+          <div class="label">Protein</div>
+          <div class="val macro-p">180g</div>
+          <div class="unit">720 kcal · 35%</div>
+          <div class="text-muted text-xs mt-8">~1g per lb BW. Non-negotiable.</div>
+        </div>
+        <div class="macro-block">
+          <div class="label">Carbohydrates</div>
+          <div class="val macro-c">175g</div>
+          <div class="unit">700 kcal · 34%</div>
+          <div class="text-muted text-xs mt-8">Complex. GF sources only.</div>
+        </div>
+        <div class="macro-block">
+          <div class="label">Fat</div>
+          <div class="val macro-f">70g</div>
+          <div class="unit">630 kcal · 31%</div>
+          <div class="text-muted text-xs mt-8">Anti-inflammatory fats.</div>
+        </div>
+      </div>
+
+      <!-- IF Window -->
+      <div class="card mb-24">
+        <div class="card-header"><h3>⏰ Intermittent Fasting — 16:8 Protocol</h3><span class="badge badge-primary">Daily</span></div>
+        <div class="grid-2">
+          <div>
+            <div style="display:flex; gap:0; margin:16px 0 8px">
+              <div style="flex:16; background:var(--bg-input); height:12px; border-radius:99px 0 0 99px; opacity:0.5;"></div>
+              <div style="flex:8; background:linear-gradient(90deg,var(--success),var(--primary)); height:12px; border-radius:0 99px 99px 0;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted)">
+              <span>8:00 PM (stop eating)</span>
+              <span>12:00 PM (first meal)</span>
+              <span>8:00 PM (last meal)</span>
+            </div>
+            <div class="grid-2 mt-16">
+              <div class="card" style="text-align:center; padding:16px">
+                <div style="font-size:1.8rem; font-weight:900; color:var(--text-muted)">16h</div>
+                <div class="text-xs text-muted">Fasting Window</div>
+                <div class="text-xs mt-4">8 PM → 12 PM</div>
+              </div>
+              <div class="card" style="text-align:center; padding:16px">
+                <div style="font-size:1.8rem; font-weight:900; color:var(--success)">8h</div>
+                <div class="text-xs text-muted">Eating Window</div>
+                <div class="text-xs mt-4">12 PM → 8 PM</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="mb-12" style="font-size:0.95rem">During Fasting Window — Allowed:</h4>
+            <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2">
+              <li>✅ Water (minimum 500ml on wake)</li>
+              <li>✅ Black coffee (no cream/sugar)</li>
+              <li>✅ Plain green tea</li>
+              <li>✅ Electrolyte water (no-calorie)</li>
+              <li>✅ Salt, lime, sparkling water</li>
+              <li>❌ No BCAAs (insulin response breaks fast)</li>
+              <li>❌ No food before 12 PM</li>
+              <li>❌ No sweetened drinks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample Day -->
+      <div class="card mb-24">
+        <div class="card-header"><h3>📋 Sample Cutting Day — Full Meal Plan</h3><button onclick="window.print()" class="btn btn-secondary btn-sm no-print">🖨️ Print</button></div>
+
+        <div class="meal-card">
+          <div class="meal-header">
+            <div class="meal-title">⏰ 12:00 PM — Meal 1: Power Lunch (Break-Fast)</div>
+            <div class="meal-macros">
+              <div class="macro-pill"><span>P:</span><span class="macro-p">55g</span></div>
+              <div class="macro-pill"><span>C:</span><span class="macro-c">45g</span></div>
+              <div class="macro-pill"><span>F:</span><span class="macro-f">20g</span></div>
+              <div class="macro-pill"><span>~</span><span>580 kcal</span></div>
+            </div>
+          </div>
+          <div class="food-item"><div class="food-icon">🍗</div><div class="food-info"><div class="food-name">Grilled Chicken Thighs (200g, boneless skinless)</div><div class="food-macros">46g protein · 0g carb · 12g fat</div></div><div class="food-protein">46g P</div></div>
+          <div class="food-item"><div class="food-icon">🍚</div><div class="food-info"><div class="food-name">White Rice (150g cooked) or Sweet Potato (200g)</div><div class="food-macros">6g protein · 40g carb · 0g fat</div></div><div class="food-protein">6g P</div></div>
+          <div class="food-item"><div class="food-icon">🥦</div><div class="food-info"><div class="food-name">Broccoli + Spinach (150g, roasted or steamed)</div><div class="food-macros">4g protein · 8g carb · 0g fat · fiber</div></div><div class="food-protein">4g P</div></div>
+          <div class="food-item"><div class="food-icon">🥑</div><div class="food-info"><div class="food-name">½ Avocado (75g)</div><div class="food-macros">1g protein · 4g carb · 11g fat · anti-inflammatory</div></div><div class="food-protein">1g P</div></div>
+          <div class="food-item"><div class="food-icon">🫒</div><div class="food-info"><div class="food-name">Extra Virgin Olive Oil (1 tbsp, for cooking)</div><div class="food-macros">0g protein · 0g carb · 14g fat · oleocanthal</div></div><div class="food-protein">—</div></div>
+          <div class="cue-box" style="margin:8px 0 0">💡 Season with turmeric, black pepper, garlic, ginger — all anti-inflammatory. Meal prep 5 days at once.</div>
+        </div>
+
+        <div class="meal-card">
+          <div class="meal-header">
+            <div class="meal-title">🕒 3:30 PM — Meal 2: Afternoon Fuel</div>
+            <div class="meal-macros">
+              <div class="macro-pill"><span>P:</span><span class="macro-p">50g</span></div>
+              <div class="macro-pill"><span>C:</span><span class="macro-c">55g</span></div>
+              <div class="macro-pill"><span>F:</span><span class="macro-f">15g</span></div>
+              <div class="macro-pill"><span>~</span><span>555 kcal</span></div>
+            </div>
+          </div>
+          <div class="food-item"><div class="food-icon">🥚</div><div class="food-info"><div class="food-name">Whole Eggs (3) + Egg Whites (4)</div><div class="food-macros">32g protein · 2g carb · 15g fat</div></div><div class="food-protein">32g P</div></div>
+          <div class="food-item"><div class="food-icon">🍠</div><div class="food-info"><div class="food-name">Sweet Potato (250g, baked)</div><div class="food-macros">4g protein · 52g carb · 0g fat · potassium + beta-carotene</div></div><div class="food-protein">4g P</div></div>
+          <div class="food-item"><div class="food-icon">🫑</div><div class="food-info"><div class="food-name">Bell Peppers + Arugula Salad (200g)</div><div class="food-macros">3g protein · 8g carb · 0g fat · Vitamin C</div></div><div class="food-protein">3g P</div></div>
+          <div class="food-item"><div class="food-icon">🥜</div><div class="food-info"><div class="food-name">Almond Butter (1 tbsp)</div><div class="food-macros">3g protein · 3g carb · 9g fat</div></div><div class="food-protein">3g P</div></div>
+        </div>
+
+        <div class="meal-card">
+          <div class="meal-header">
+            <div class="meal-title">🕕 5:30 PM — Pre/Post Workout Protein</div>
+            <div class="meal-macros">
+              <div class="macro-pill"><span>P:</span><span class="macro-p">30g</span></div>
+              <div class="macro-pill"><span>C:</span><span class="macro-c">25g</span></div>
+              <div class="macro-pill"><span>F:</span><span class="macro-f">5g</span></div>
+              <div class="macro-pill"><span>~</span><span>265 kcal</span></div>
+            </div>
+          </div>
+          <div class="food-item"><div class="food-icon">🥤</div><div class="food-info"><div class="food-name">Whey Isolate or Egg White Protein Shake (GF/DF)</div><div class="food-macros">25–30g protein · minimal carbs/fat · quick absorbing</div></div><div class="food-protein">28g P</div></div>
+          <div class="food-item"><div class="food-icon">🍌</div><div class="food-info"><div class="food-name">Banana (medium) or Rice Cakes (2)</div><div class="food-macros">2g protein · 25g carb · fast carbs for workout</div></div><div class="food-protein">2g P</div></div>
+        </div>
+
+        <div class="meal-card">
+          <div class="meal-header">
+            <div class="meal-title">🕗 7:30 PM — Meal 3: Dinner (Last Meal)</div>
+            <div class="meal-macros">
+              <div class="macro-pill"><span>P:</span><span class="macro-p">55g</span></div>
+              <div class="macro-pill"><span>C:</span><span class="macro-c">45g</span></div>
+              <div class="macro-pill"><span>F:</span><span class="macro-f">22g</span></div>
+              <div class="macro-pill"><span>~</span><span>594 kcal</span></div>
+            </div>
+          </div>
+          <div class="food-item"><div class="food-icon">🐟</div><div class="food-info"><div class="food-name">Wild Salmon (200g) — Omega-3 powerhouse</div><div class="food-macros">40g protein · 0g carb · 14g fat · anti-inflammatory king</div></div><div class="food-protein">40g P</div></div>
+          <div class="food-item"><div class="food-icon">🍚</div><div class="food-info"><div class="food-name">Jasmine Rice or Quinoa (130g cooked)</div><div class="food-macros">4g protein · 30g carb · 0g fat</div></div><div class="food-protein">4g P</div></div>
+          <div class="food-item"><div class="food-icon">🥗</div><div class="food-info"><div class="food-name">Large Salad: Arugula, Cucumber, Tomato, Olive Oil + Lemon</div><div class="food-macros">3g protein · 12g carb · 14g fat (olive oil) · phytonutrients</div></div><div class="food-protein">3g P</div></div>
+          <div class="food-item"><div class="food-icon">🫚</div><div class="food-info"><div class="food-name">Extra Virgin Olive Oil (1 tbsp drizzle)</div><div class="food-macros">Anti-inflammatory. Polyphenol-rich.</div></div><div class="food-protein">—</div></div>
+        </div>
+
+        <div class="card" style="background:var(--bg-input); margin-top:8px">
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px">
+            <div class="text-center"><div style="font-size:1.5rem; font-weight:900; color:var(--success)">1,994</div><div class="text-xs text-muted">Total Calories</div></div>
+            <div class="text-center"><div style="font-size:1.5rem; font-weight:900; color:var(--primary)">190g</div><div class="text-xs text-muted">Total Protein</div></div>
+            <div class="text-center"><div style="font-size:1.5rem; font-weight:900; color:var(--gold)">170g</div><div class="text-xs text-muted">Total Carbs</div></div>
+            <div class="text-center"><div style="font-size:1.5rem; font-weight:900; color:var(--warning)">62g</div><div class="text-xs text-muted">Total Fat</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anti-Inflammatory Foods -->
+      <div class="card mb-24">
+        <div class="card-header"><h3>🌿 Anti-Inflammatory Food Priorities</h3></div>
+        <div class="grid-2">
+          <div>
+            <div class="label mb-8">✅ Eat Daily</div>
+            <div class="food-item"><div class="food-icon">🐟</div><div class="food-info"><div class="food-name">Wild Salmon / Sardines</div><div class="food-macros">Omega-3 EPA/DHA. Reduces systemic inflammation.</div></div></div>
+            <div class="food-item"><div class="food-icon">🫒</div><div class="food-info"><div class="food-name">Extra Virgin Olive Oil</div><div class="food-macros">Oleocanthal — natural COX inhibitor (like ibuprofen)</div></div></div>
+            <div class="food-item"><div class="food-icon">🫚</div><div class="food-info"><div class="food-name">Turmeric + Black Pepper</div><div class="food-macros">Curcumin. Black pepper increases absorption 2000%.</div></div></div>
+            <div class="food-item"><div class="food-icon">🫐</div><div class="food-info"><div class="food-name">Blueberries / Mixed Berries</div><div class="food-macros">Anthocyanins. Anti-inflammatory antioxidants.</div></div></div>
+            <div class="food-item"><div class="food-icon">🥦</div><div class="food-info"><div class="food-name">Broccoli / Cruciferous Veg</div><div class="food-macros">Sulforaphane. Liver detox. Hormonal balance.</div></div></div>
+            <div class="food-item"><div class="food-icon">🧄</div><div class="food-info"><div class="food-name">Garlic + Ginger</div><div class="food-macros">Allicin + gingerol. Immune + anti-inflammatory.</div></div></div>
+          </div>
+          <div>
+            <div class="label mb-8">❌ Eliminate Completely</div>
+            <div class="food-item"><div class="food-icon">🚫</div><div class="food-info"><div class="food-name">All Gluten (wheat, barley, rye)</div><div class="food-macros">Your requirement. Inflammatory gut permeability.</div></div></div>
+            <div class="food-item"><div class="food-icon">🚫</div><div class="food-info"><div class="food-name">All Dairy Products</div><div class="food-macros">Your requirement. Common inflammatory trigger.</div></div></div>
+            <div class="food-item"><div class="food-icon">🚫</div><div class="food-info"><div class="food-name">Vegetable / Seed Oils</div><div class="food-macros">Canola, soybean, sunflower — high omega-6 ratio.</div></div></div>
+            <div class="food-item"><div class="food-icon">🚫</div><div class="food-info"><div class="food-name">Added Sugar / HFCS</div><div class="food-macros">Drives insulin spikes, fat storage, inflammation.</div></div></div>
+            <div class="food-item"><div class="food-icon">🚫</div><div class="food-info"><div class="food-name">Alcohol</div><div class="food-macros">Disrupts sleep, testosterone, recovery, inflammation.</div></div></div>
+            <div class="food-item"><div class="food-icon">🚫</div><div class="food-info"><div class="food-name">Processed Foods / Packaged Snacks</div><div class="food-macros">Even "GF" processed foods — use whole foods.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end cutting -->
+
+    <!-- ══════════ MAINTENANCE PHASE ══════════ -->
+    <div class="tab-panel" id="maintenance">
+      <div class="alert alert-success mb-24"><span>⚖️</span><div><strong>Maintenance Phase (Months 5–8):</strong> You've reached 175–180 lbs. Now we maintain while building strength. Calories increase to ~2,400. Protein stays high. Carbs increase around workouts. IF window stays 16:8.</div></div>
+      <div class="macro-grid">
+        <div class="macro-block"><div class="label">Calories</div><div class="val macro-cal">2,400</div><div class="unit">kcal / day</div></div>
+        <div class="macro-block"><div class="label">Protein</div><div class="val macro-p">175g</div><div class="unit">700 kcal · 29%</div></div>
+        <div class="macro-block"><div class="label">Carbohydrates</div><div class="val macro-c">240g</div><div class="unit">960 kcal · 40%</div></div>
+        <div class="macro-block"><div class="label">Fat</div><div class="val macro-f">82g</div><div class="unit">738 kcal · 31%</div></div>
+      </div>
+      <div class="card">
+        <h4 class="mb-12">Key Changes from Cutting Phase</h4>
+        <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2; padding-left:16px">
+          <li>📈 Add ~350 more calories — primarily from carbs (rice, sweet potato, oats)</li>
+          <li>🍌 Larger pre-workout meal: banana + protein shake</li>
+          <li>🍚 Post-workout: 60g carbs within 1 hour of training</li>
+          <li>💪 Keep protein at minimum 175g — non-negotiable for muscle retention</li>
+          <li>⏰ Same IF window: 12 PM – 8 PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ══════════ LEAN BULK ══════════ -->
+    <div class="tab-panel" id="leanBulk">
+      <div class="alert alert-gold mb-24"><span>💪</span><div><strong>Lean Muscle Phase (Months 9–12):</strong> At 172 lbs and lean, we now add 200–300 calories for muscle growth. Expect 0.25–0.5 lb/week gain — mostly muscle. Heavy lifting + adequate fuel = lean athletic physique.</div></div>
+      <div class="macro-grid">
+        <div class="macro-block"><div class="label">Calories</div><div class="val macro-cal">2,700</div><div class="unit">kcal / day</div></div>
+        <div class="macro-block"><div class="label">Protein</div><div class="val macro-p">185g</div><div class="unit">740 kcal · 27%</div></div>
+        <div class="macro-block"><div class="label">Carbohydrates</div><div class="val macro-c">280g</div><div class="unit">1,120 kcal · 41%</div></div>
+        <div class="macro-block"><div class="label">Fat</div><div class="val macro-f">93g</div><div class="unit">837 kcal · 31%</div></div>
+      </div>
+      <div class="alert alert-info"><span>📊</span><div>Monitor body weight weekly. If gaining more than 0.5 lb/week, reduce calories by 100. If not gaining at all for 2+ weeks, add 150 calories. Adjust dynamically.</div></div>
+    </div>
+
+    <!-- ══════════ SHOPPING LISTS ══════════ -->
+    <div class="tab-panel" id="shopping">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><h3>🛒 Costco List — Weekly Staples</h3><span class="badge badge-gold">Primary</span></div>
+          <div class="label mb-8">Protein Sources</div>
+          <div class="food-item"><div class="food-icon">🍗</div><div class="food-info"><div class="food-name">Kirkland Chicken Thighs (family pack)</div><div class="food-macros">~10 lbs · best value protein</div></div></div>
+          <div class="food-item"><div class="food-icon">🥚</div><div class="food-info"><div class="food-name">Kirkland Organic Eggs (5 dozen)</div><div class="food-macros">Complete amino acid profile</div></div></div>
+          <div class="food-item"><div class="food-icon">🐟</div><div class="food-info"><div class="food-name">Wild Alaskan Salmon (frozen fillets)</div><div class="food-macros">Omega-3 powerhouse · 2–3 lbs</div></div></div>
+          <div class="food-item"><div class="food-icon">🥩</div><div class="food-info"><div class="food-name">Ground Turkey 93% Lean (family pack)</div><div class="food-macros">Versatile · meal prep staple</div></div></div>
+          <div class="food-item"><div class="food-icon">🦐</div><div class="food-info"><div class="food-name">Frozen Shrimp (large bag)</div><div class="food-macros">High protein · low fat · quick cook</div></div></div>
+
+          <div class="label mb-8 mt-16">Carbohydrate Sources (GF)</div>
+          <div class="food-item"><div class="food-icon">🍚</div><div class="food-info"><div class="food-name">Jasmine Rice (25 lb bag)</div><div class="food-macros">Main carb source · affordable</div></div></div>
+          <div class="food-item"><div class="food-icon">🍠</div><div class="food-info"><div class="food-name">Sweet Potatoes (10 lb bag)</div><div class="food-macros">Beta-carotene · fiber · potassium</div></div></div>
+          <div class="food-item"><div class="food-icon">🫐</div><div class="food-info"><div class="food-name">Organic Frozen Berries (5 lb bag)</div><div class="food-macros">Antioxidants · anti-inflammatory</div></div></div>
+          <div class="food-item"><div class="food-icon">🌽</div><div class="food-info"><div class="food-name">Quinoa (4 lb bag)</div><div class="food-macros">Complete protein GF grain</div></div></div>
+
+          <div class="label mb-8 mt-16">Fats + Oils</div>
+          <div class="food-item"><div class="food-icon">🫒</div><div class="food-info"><div class="food-name">Kirkland EVOO (3L jug)</div><div class="food-macros">Primary cooking fat · polyphenols</div></div></div>
+          <div class="food-item"><div class="food-icon">🥑</div><div class="food-info"><div class="food-name">Avocados (bag of 8)</div><div class="food-macros">Healthy fat · potassium · B vitamins</div></div></div>
+          <div class="food-item"><div class="food-icon">🥜</div><div class="food-info"><div class="food-name">Almond Butter (no added sugar, 2-pack)</div><div class="food-macros">Snack fat + protein</div></div></div>
+
+          <div class="label mb-8 mt-16">Vegetables</div>
+          <div class="food-item"><div class="food-icon">🥦</div><div class="food-info"><div class="food-name">Frozen Broccoli (5 lb bag)</div><div class="food-macros">Sulforaphane · always have ready</div></div></div>
+          <div class="food-item"><div class="food-icon">🥬</div><div class="food-info"><div class="food-name">Baby Spinach (2 lb bag)</div><div class="food-macros">Iron · magnesium · anti-inflammatory</div></div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h3>🌿 Whole Foods List — Upgrades</h3><span class="badge badge-success">Supplement Costco</span></div>
+          <div class="label mb-8">Premium Protein</div>
+          <div class="food-item"><div class="food-icon">🐄</div><div class="food-info"><div class="food-name">Grass-Fed Ground Beef (85% lean)</div><div class="food-macros">Higher omega-3 than grain-fed · CLA</div></div></div>
+          <div class="food-item"><div class="food-icon">🦃</div><div class="food-info"><div class="food-name">Organic Turkey Breast (deli counter)</div><div class="food-macros">Quick protein · no additives</div></div></div>
+          <div class="food-item"><div class="food-icon">🐟</div><div class="food-info"><div class="food-name">Fresh Wild-Caught Fish (variety)</div><div class="food-macros">Cod, halibut, tuna · rotation</div></div></div>
+
+          <div class="label mb-8 mt-16">Anti-Inflammatory Specifics</div>
+          <div class="food-item"><div class="food-icon">🫚</div><div class="food-info"><div class="food-name">Turmeric (fresh root or powder)</div><div class="food-macros">Use daily. With black pepper always.</div></div></div>
+          <div class="food-item"><div class="food-icon">🧄</div><div class="food-info"><div class="food-name">Fresh Ginger Root</div><div class="food-macros">Grate into meals. Anti-inflammatory.</div></div></div>
+          <div class="food-item"><div class="food-icon">🫐</div><div class="food-info"><div class="food-name">Acai Packets (frozen)</div><div class="food-macros">Antioxidant powerhouse</div></div></div>
+          <div class="food-item"><div class="food-icon">🍵</div><div class="food-info"><div class="food-name">Matcha Powder (ceremonial grade)</div><div class="food-macros">L-theanine + caffeine. Better than coffee for focus.</div></div></div>
+          <div class="food-item"><div class="food-icon">🌿</div><div class="food-info"><div class="food-name">Collagen Peptides (GF/DF)</div><div class="food-macros">Joint health. Skin. Hair. Add to coffee/water.</div></div></div>
+
+          <div class="label mb-8 mt-16">Specialty GF Items</div>
+          <div class="food-item"><div class="food-icon">🌾</div><div class="food-info"><div class="food-name">Certified GF Oats (Bob's Red Mill)</div><div class="food-macros">Slow-digesting carbs. If tolerated.</div></div></div>
+          <div class="food-item"><div class="food-icon">🥛</div><div class="food-info"><div class="food-name">Unsweetened Coconut Milk / Almond Milk</div><div class="food-macros">Dairy replacement for cooking/protein shakes</div></div></div>
+          <div class="food-item"><div class="food-icon">🍫</div><div class="food-info"><div class="food-name">Dark Chocolate 85%+ (GF)</div><div class="food-macros">Flavonoids. Magnesium. 1-2 squares only.</div></div></div>
+
+          <div class="alert alert-warning mt-16"><span>⚠️</span><div><strong>Always check labels</strong> for "Contains: Wheat" or "May Contain Gluten" cross-contamination warnings.</div></div>
+        </div>
+      </div>
+
+      <!-- Meal Prep System -->
+      <div class="card mt-20">
+        <div class="card-header"><h3>🍱 Sunday Meal Prep System (2 Hours)</h3><span class="badge badge-primary">Weekly</span></div>
+        <div class="grid-2">
+          <div>
+            <div class="label mb-8">Batch Cook List</div>
+            <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2; padding-left:16px">
+              <li>🍗 <strong>4 lbs chicken thighs</strong> — season, oven roast (400°F × 35 min)</li>
+              <li>🍚 <strong>6 cups dry rice</strong> — rice cooker. Makes ~18 cups cooked.</li>
+              <li>🍠 <strong>6–8 sweet potatoes</strong> — bake whole 400°F × 45 min</li>
+              <li>🥦 <strong>2 lbs broccoli</strong> — roast with EVOO + turmeric</li>
+              <li>🥚 <strong>12 hard-boiled eggs</strong> — boil, refrigerate, grab-and-go</li>
+              <li>🥩 <strong>2 lbs ground turkey</strong> — brown with garlic, ginger, spices</li>
+            </ul>
+          </div>
+          <div>
+            <div class="label mb-8">Container System</div>
+            <ul style="color:var(--text-muted); font-size:0.85rem; line-height:2.2; padding-left:16px">
+              <li>🥡 Portion into 5 lunch containers: protein + rice + veg</li>
+              <li>🥡 Portion into 5 dinner containers: protein + sweet potato + salad</li>
+              <li>🧃 Pre-mix: 5 protein shake servings in bags</li>
+              <li>🫙 Mason jar salads: 5 days of greens</li>
+              <li>🍎 Pre-cut fruit/veg snacks for grab-and-go</li>
+            </ul>
+            <div class="alert alert-success mt-12"><span>⏱️</span><div>Pre-made meals = zero decision fatigue = consistent macros = faster results.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ SUPPLEMENTS ══════════ -->
+    <div class="tab-panel" id="supplements">
+      <div class="alert alert-info mb-20"><span>💊</span><div><strong>Philosophy:</strong> Food first. Supplements fill gaps. These are the evidence-based essentials for your goals: joint health, performance, recovery, testosterone, and anti-inflammation.</div></div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><h3>💊 Essential Stack</h3><span class="badge badge-primary">Daily</span></div>
+          <div class="supplement-item">
+            <div class="supp-icon">☀️</div>
+            <div class="supp-info"><h5>Vitamin D3 + K2</h5><p>5,000 IU D3 + 100mcg K2. Testosterone, immunity, bone density. Most desk workers are deficient.</p></div>
+            <div class="supp-timing">AM with food</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">🐟</div>
+            <div class="supp-info"><h5>Omega-3 Fish Oil</h5><p>3–4g EPA+DHA daily. Anti-inflammatory. Joint health. Brain. Triglycerides. Kirkland brand is pharmaceutical grade.</p></div>
+            <div class="supp-timing">AM + PM</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">🧲</div>
+            <div class="supp-info"><h5>Magnesium Glycinate</h5><p>400mg before bed. Sleep quality, muscle recovery, reduces cortisol, reduces cramps. Most critical supplement.</p></div>
+            <div class="supp-timing">9:30 PM</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">🌿</div>
+            <div class="supp-info"><h5>Collagen Peptides (GF)</h5><p>10–20g with Vitamin C. Joint cartilage synthesis. Skin elasticity. Tendon health. Crucial for your rehab.</p></div>
+            <div class="supp-timing">Pre/post workout</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">⚡</div>
+            <div class="supp-info"><h5>Creatine Monohydrate</h5><p>5g daily (no load needed). Strength, power, muscle, brain. Most researched supplement ever. Cheap + effective.</p></div>
+            <div class="supp-timing">Any time (daily)</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">🦠</div>
+            <div class="supp-info"><h5>Probiotic (multi-strain)</h5><p>Gut health → reduced inflammation → better recovery. 50 billion CFU minimum. Refrigerated preferred.</p></div>
+            <div class="supp-timing">AM (empty stomach)</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h3>🔥 Performance + Recovery</h3></div>
+          <div class="supplement-item">
+            <div class="supp-icon">🥤</div>
+            <div class="supp-info"><h5>Whey Isolate or Egg White Protein</h5><p>GF/DF. 25–30g per serving. Post-workout and meal gaps. Optimum Nutrition Isolate or NOW Sports Egg White.</p></div>
+            <div class="supp-timing">Post workout</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">🫙</div>
+            <div class="supp-info"><h5>Electrolytes (no-sugar)</h5><p>LMNT or Liquid IV (unsweetened). Sodium, Potassium, Magnesium. Critical during fasting window for energy.</p></div>
+            <div class="supp-timing">Fasting window</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">🧪</div>
+            <div class="supp-info"><h5>Zinc (15–30mg)</h5><p>Testosterone production. Immune. Wound healing. Take at night. Separate from calcium.</p></div>
+            <div class="supp-timing">PM with meal</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">🫚</div>
+            <div class="supp-info"><h5>Turmeric/Curcumin (with Piperine)</h5><p>500–1000mg curcumin. Anti-inflammatory equivalent to NSAIDs without side effects. Black pepper extract essential.</p></div>
+            <div class="supp-timing">AM + PM with food</div>
+          </div>
+          <div class="supplement-item">
+            <div class="supp-icon">☕</div>
+            <div class="supp-info"><h5>Pre-Workout (Optional)</h5><p>GF option: black coffee + L-theanine (200mg). No artificial GF-risky additives. Natural caffeine only.</p></div>
+            <div class="supp-timing">30 min pre-workout</div>
+          </div>
+
+          <div class="divider"></div>
+          <div class="label mb-8">Hydration Protocol</div>
+          <ul style="color:var(--text-muted); font-size:0.83rem; line-height:2.2; padding-left:16px">
+            <li>💧 500ml water immediately on waking</li>
+            <li>💧 500ml water before first meal (noon)</li>
+            <li>💧 500ml water before each meal</li>
+            <li>💧 500ml water during training</li>
+            <li>💧 500ml water after training</li>
+            <li>🎯 <strong>Target: 3.5–4L total per day</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/js/app.js"></script>
+<script>
+  document.querySelectorAll('#nutritionTabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#nutritionTabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === target));
+    });
+  });
+</script>
+</body>
+</html>

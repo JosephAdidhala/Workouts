@@ -1,0 +1,18 @@
+/* ============================================================
+   OPERATION PRIME — PRINT STYLESHEET
+   ============================================================ */
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11pt; }
+  .print-page { page-break-after: always; padding: 20px; }
+  .print-title { font-size: 22pt; font-weight: 900; margin-bottom: 8px; }
+  .print-subtitle { font-size: 11pt; color: #555; margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  th { background: #1a1a2e; color: white; padding: 8px 12px; font-size: 9pt; text-align: left; }
+  td { padding: 8px 12px; border-bottom: 1px solid #e0e0e0; font-size: 10pt; }
+  tr:nth-child(even) td { background: #f8f8f8; }
+  h2 { font-size: 14pt; margin: 20px 0 8px; border-bottom: 2px solid #00d4ff; padding-bottom: 4px; }
+  h3 { font-size: 12pt; margin: 16px 0 6px; }
+  .no-print { display: none !important; }
+  a { color: black; text-decoration: none; }
+}

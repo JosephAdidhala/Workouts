@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Progress Tracker | Operation Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/print.css" />
+</head>
+<body>
+<div class="overlay-bg" id="navOverlay"></div>
+<div class="app-layout">
+  <header class="site-header">
+    <div class="header-logo"><div class="logo-icon">⚡</div><span>OPERATION <span>PRIME</span></span></div>
+    <div class="header-meta"><span class="day-badge" data-day-number>Day 1</span><button class="menu-toggle" id="menuToggle">☰</button></div>
+  </header>
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <a href="../index.html" class="nav-link"><span class="nav-icon">⚡</span> Dashboard</a>
+      <a href="calendar.html" class="nav-link"><span class="nav-icon">📅</span> Calendar</a>
+      <a href="habits.html" class="nav-link"><span class="nav-icon">✅</span> Habit Tracker</a>
+      <a href="tracker.html" class="nav-link active"><span class="nav-icon">📊</span> Progress</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Training</div>
+      <a href="phase1.html" class="nav-link"><span class="nav-icon">🔱</span> Phase 1</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Protocols</div>
+      <a href="rehab.html" class="nav-link"><span class="nav-icon">🦴</span> Rehab Library</a>
+      <a href="mobility.html" class="nav-link"><span class="nav-icon">🧘</span> Mobility Library</a>
+      <a href="daily.html" class="nav-link"><span class="nav-icon">🕐</span> Daily Schedule</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Lifestyle</div>
+      <a href="nutrition.html" class="nav-link"><span class="nav-icon">🥩</span> Nutrition System</a>
+      <a href="equipment.html" class="nav-link"><span class="nav-icon">🛒</span> Equipment Guide</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="label">📊 Progress Tracking System</div>
+      <h1>Body <span class="gradient-text">Transformation Dashboard</span></h1>
+      <p>Track every metric that matters. Measure weekly. Photos monthly. Data drives decisions.</p>
+    </div>
+
+    <!-- Current Stats -->
+    <div class="stats-grid mb-32">
+      <div class="stat-card">
+        <div class="label">Start Weight</div>
+        <div class="stat-value">190 <span style="font-size:1rem;color:var(--text-muted)">lbs</span></div>
+        <div class="text-muted text-sm">May 11, 2026</div>
+      </div>
+      <div class="stat-card card-glow">
+        <div class="label">Current Weight</div>
+        <div class="stat-value primary" id="currentWeight">— lbs</div>
+        <div class="text-muted text-sm" id="lastLogDate">Not logged yet</div>
+      </div>
+      <div class="stat-card card-gold">
+        <div class="label">Goal Weight</div>
+        <div class="stat-value gold">172 <span style="font-size:1rem;color:var(--text-muted)">lbs</span></div>
+        <div class="text-muted text-sm">~18 lbs to go</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Lost So Far</div>
+        <div class="stat-value success" id="lostSoFar">0 lbs</div>
+        <div class="text-muted text-sm" id="lostPct">0% of goal</div>
+      </div>
+    </div>
+
+    <div class="grid-2 mb-32">
+
+      <!-- Log Measurement -->
+      <div class="card">
+        <div class="card-header"><h3>📝 Log Measurement</h3><span class="badge badge-primary">Weekly — Sunday</span></div>
+        <form id="measureForm">
+          <div class="form-row">
+            <div class="form-group"><label>Weight (lbs)</label><input type="number" name="weight" step="0.1" placeholder="190.0" required /></div>
+            <div class="form-group"><label>Waist (inches)</label><input type="number" name="waist" step="0.25" placeholder="36.0" /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Chest (inches)</label><input type="number" name="chest" step="0.25" placeholder="42.0" /></div>
+            <div class="form-group"><label>Hips (inches)</label><input type="number" name="hips" step="0.25" placeholder="40.0" /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Right Arm (inches)</label><input type="number" name="arm_r" step="0.25" placeholder="15.0" /></div>
+            <div class="form-group"><label>Left Arm (inches)</label><input type="number" name="arm_l" step="0.25" placeholder="15.0" /></div>
+          </div>
+          <div class="form-group"><label>Energy Level (1–10)</label>
+            <div style="display:flex; align-items:center; gap:12px; margin-top:6px">
+              <input type="range" name="energy" min="1" max="10" value="7" id="energyRange" oninput="document.getElementById('energyVal').textContent=this.value">
+              <span id="energyVal" style="color:var(--primary); font-weight:800; font-size:1.2rem; width:20px">7</span>
+            </div>
+          </div>
+          <div class="form-group"><label>Sleep Quality (1–10)</label>
+            <div style="display:flex; align-items:center; gap:12px; margin-top:6px">
+              <input type="range" name="sleep" min="1" max="10" value="7" id="sleepRange" oninput="document.getElementById('sleepVal').textContent=this.value">
+              <span id="sleepVal" style="color:var(--gold); font-weight:800; font-size:1.2rem; width:20px">7</span>
+            </div>
+          </div>
+          <div class="form-group"><label>Notes / How You Feel</label><textarea name="notes" rows="2" placeholder="Energy good, back less stiff this week..."></textarea></div>
+          <button type="submit" class="btn btn-primary btn-block">💾 Save Measurement</button>
+        </form>
+      </div>
+
+      <!-- Weight Chart -->
+      <div class="card">
+        <div class="card-header"><h3>📈 Weight Progress</h3><span class="text-muted text-sm">Last 20 entries</span></div>
+        <div id="weightChart" style="min-height:160px; display:flex; align-items:center; justify-content:center">
+          <p class="text-muted text-sm">Log measurements to see chart</p>
+        </div>
+        <div class="divider"></div>
+        <div class="card-header" style="margin-bottom:12px"><h3>🎯 Goal Progress</h3></div>
+        <div class="progress-label"><span>Weight Loss (190 → 172)</span><span id="weightProgress">0%</span></div>
+        <div class="progress-bar mb-16"><div class="progress-fill" id="weightProgressBar" style="width:0%"></div></div>
+        <div class="progress-label"><span>Waist Goal (&lt;33")</span><span>0%</span></div>
+        <div class="progress-bar mb-16"><div class="progress-fill gold" style="width:0%"></div></div>
+        <div class="progress-label"><span>Program Completion</span><span data-day-number>Day 1</span>/365</div>
+        <div class="progress-bar"><div class="progress-fill" id="programBar" style="width:0.3%"></div></div>
+      </div>
+
+    </div>
+
+    <!-- Measurement Log -->
+    <div class="card mb-32">
+      <div class="card-header">
+        <h3>📋 Measurement Log</h3>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm no-print">🖨️ Print Log</button>
+      </div>
+      <div id="measureLog"><p class="text-muted text-sm">No measurements logged yet. Log your first measurement above.</p></div>
+    </div>
+
+    <!-- Physique Milestones -->
+    <div class="card mb-32">
+      <div class="card-header"><h3>🏆 Physique Milestones</h3></div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px">
+        <div class="card" id="milestone-185" style="padding:16px; text-align:center; border-color:var(--border)">
+          <div style="font-size:1.8rem">⚖️</div>
+          <h5 style="margin:8px 0 4px">185 lbs</h5>
+          <p class="text-xs">First 5 lbs down</p>
+          <div class="badge badge-muted mt-8">Locked</div>
+        </div>
+        <div class="card" id="milestone-180" style="padding:16px; text-align:center; border-color:var(--border)">
+          <div style="font-size:1.8rem">📉</div>
+          <h5 style="margin:8px 0 4px">180 lbs</h5>
+          <p class="text-xs">10 lbs lost — momentum phase</p>
+          <div class="badge badge-muted mt-8">Locked</div>
+        </div>
+        <div class="card" id="milestone-175" style="padding:16px; text-align:center; border-color:var(--border)">
+          <div style="font-size:1.8rem">🔥</div>
+          <h5 style="margin:8px 0 4px">175 lbs</h5>
+          <p class="text-xs">Visibly leaner — jawline sharpening</p>
+          <div class="badge badge-muted mt-8">Locked</div>
+        </div>
+        <div class="card" id="milestone-172" style="padding:16px; text-align:center; border-color:var(--border)">
+          <div style="font-size:1.8rem">💎</div>
+          <h5 style="margin:8px 0 4px">172 lbs</h5>
+          <p class="text-xs">GOAL WEIGHT — Athletic Physique</p>
+          <div class="badge badge-muted mt-8">Locked</div>
+        </div>
+        <div class="card" style="padding:16px; text-align:center; border-color:var(--border)">
+          <div style="font-size:1.8rem">🧘</div>
+          <h5 style="margin:8px 0 4px">Deep Squat</h5>
+          <p class="text-xs">Full depth, heels down, arms up</p>
+          <div class="badge badge-muted mt-8">Locked</div>
+        </div>
+        <div class="card" style="padding:16px; text-align:center; border-color:var(--border)">
+          <div style="font-size:1.8rem">💪</div>
+          <h5 style="margin:8px 0 4px">5 Pull-Ups</h5>
+          <p class="text-xs">Strict bodyweight chin-ups</p>
+          <div class="badge badge-muted mt-8">Locked</div>
+        </div>
+        <div class="card" style="padding:16px; text-align:center; border-color:var(--border)">
+          <div style="font-size:1.8rem">🏋️</div>
+          <h5 style="margin:8px 0 4px">2× BW Deadlift</h5>
+          <p class="text-xs">380+ lbs conventional pull</p>
+          <div class="badge badge-muted mt-8">Locked</div>
+        </div>
+        <div class="card" style="padding:16px; text-align:center; border-color:var(--border)">
+          <div style="font-size:1.8rem">😴</div>
+          <h5 style="margin:8px 0 4px">Pain-Free Back</h5>
+          <p class="text-xs">0/10 lower back pain at rest</p>
+          <div class="badge badge-muted mt-8">Locked</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Photo Guide -->
+    <div class="card mb-32">
+      <div class="card-header"><h3>📸 Progress Photo Protocol</h3><span class="badge badge-gold">Monthly</span></div>
+      <div class="alert alert-info mb-16"><span>📷</span><div><strong>Take photos on the 1st of each month, in the morning, before eating, same lighting, same location.</strong> Photos reveal what the scale doesn't — muscle gain while losing fat, posture improvements, and body composition shifts.</div></div>
+      <div class="grid-3">
+        <div class="card" style="padding:16px; text-align:center">
+          <div style="font-size:2rem; margin-bottom:8px">👤</div>
+          <h5>Front View</h5>
+          <p class="text-sm">Arms at sides. Relaxed. No flexing. Neutral face.</p>
+        </div>
+        <div class="card" style="padding:16px; text-align:center">
+          <div style="font-size:2rem; margin-bottom:8px">🔄</div>
+          <h5>Side View</h5>
+          <p class="text-sm">Profile. Posture assessment. Spine alignment visible.</p>
+        </div>
+        <div class="card" style="padding:16px; text-align:center">
+          <div style="font-size:2rem; margin-bottom:8px">↩️</div>
+          <h5>Back View</h5>
+          <p class="text-sm">Back definition. Shoulder width. Waist taper.</p>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <div>
+          <h5 class="mb-8">✅ Same Conditions Every Time</h5>
+          <ul style="color:var(--text-muted); font-size:0.82rem; line-height:2.2; padding-left:16px">
+            <li>📅 Same day: 1st of each month</li>
+            <li>⏰ Same time: Morning, before eating</li>
+            <li>🩲 Same clothes: Shorts only (men)</li>
+            <li>💡 Same lighting: Natural window light</li>
+            <li>📍 Same location: Bathroom mirror or wall</li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="mb-8">📅 Photo Schedule</h5>
+          <table class="workout-table">
+            <thead><tr><th>Date</th><th>Milestone</th><th>Done</th></tr></thead>
+            <tbody>
+              <tr><td>May 11, 2026</td><td>Start (Day 1)</td><td><span class="badge badge-warning">Due</span></td></tr>
+              <tr><td>Jun 1, 2026</td><td>Month 1</td><td><span class="badge badge-muted">—</span></td></tr>
+              <tr><td>Jul 1, 2026</td><td>Month 2</td><td><span class="badge badge-muted">—</span></td></tr>
+              <tr><td>Aug 9, 2026</td><td>Day 90 (Phase 1 End)</td><td><span class="badge badge-muted">—</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strength Tracker -->
+    <div class="card mb-32">
+      <div class="card-header"><h3>🏋️ Strength Tracker</h3><span class="text-muted text-sm">Log PRs</span></div>
+      <table class="workout-table" id="strengthLog">
+        <thead><tr><th>Lift</th><th>Phase 1 Start</th><th>Week 4 PR</th><th>Week 8 PR</th><th>Week 12 PR</th><th>Phase 2 Goal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Deadlift</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td class="text-primary">1.75× BW</td></tr>
+          <tr><td><strong>Squat</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td class="text-primary">1.25× BW</td></tr>
+          <tr><td><strong>Bench</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td class="text-primary">1.0× BW</td></tr>
+          <tr><td><strong>Pull-Up</strong></td><td>— reps</td><td>—</td><td>—</td><td>—</td><td class="text-primary">10 clean</td></tr>
+          <tr><td><strong>Hip Thrust</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td class="text-primary">2.0× BW</td></tr>
+          <tr><td><strong>Row 2000m</strong></td><td>— min</td><td>—</td><td>—</td><td>—</td><td class="text-primary">&lt;8:00 min</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Update weight display
+    const latest = OP.getLatestMeasurement();
+    if (latest) {
+      document.getElementById('currentWeight').textContent = latest.weight + ' lbs';
+      document.getElementById('lastLogDate').textContent = 'Logged: ' + latest.date;
+      const lost = 190.5 - parseFloat(latest.weight);
+      document.getElementById('lostSoFar').textContent = Math.max(0, lost).toFixed(1) + ' lbs';
+      const pct = Math.max(0, (lost / 18) * 100).toFixed(0);
+      document.getElementById('lostPct').textContent = pct + '% of goal';
+      document.getElementById('weightProgress').textContent = pct + '%';
+      document.getElementById('weightProgressBar').style.width = Math.min(100, pct) + '%';
+    }
+    // Program progress
+    const dayNum = OP.getDayNumber();
+    document.getElementById('programBar').style.width = Math.min(100, (dayNum/365)*100) + '%';
+  });
+</script>
+</body>
+</html>
